@@ -1,0 +1,129 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Fihirana_database</RootNamespace>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWarn>SYSLIB0014</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fihirana.ico</ApplicationIcon>
+    <Copyright>Rindra Razafinjatovo, 2024</Copyright>
+    <PackageIcon>icons8-chatgpt-512.png</PackageIcon>
+    <FileVersion>2.0.0.1</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="UserControl\DelayedSearchTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UserControl\FihiranaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControl\RixCustomGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UserControl\rixLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UserControl\userCtrl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Downloads\icons8-chatgpt-512.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="bin\Debug\source\song\app.js" />
+    <None Include="bin\Debug\source\song\js\jquery.min.js" />
+    <None Include="bin\Debug\source\song\js\textFit.min.js" />
+    <None Include="bin\Debug\source\song\css\animate.min.css" />
+    <None Include="bin\Debug\source\song\css\style.css" />
+    <None Include="bin\Debug\source\bible\css\style.css" />
+    <None Include="bin\Debug\source\bible\index.html" />
+    <None Include="bin\Debug\source\song\index.html" />
+    <Content Include="fihirana.ico" />
+    <Content Include="Libraries\1442428805_office_suite_pro_7.ico" />
+    <Content Include="Source\app.js" />
+    <Content Include="Source\Bible\index.html" />
+    <Content Include="Source\Bible\style.css" />
+    <Content Include="Source\css\animate.min.css" />
+    <Content Include="Source\css\style.css" />
+    <Content Include="Source\img\bg.jpg" />
+    <Content Include="Source\index.html" />
+    <Content Include="Source\js\app.js" />
+    <Content Include="Source\js\jquery.min.js" />
+    <Content Include="Source\js\textFit.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Data.Desktop" Version="23.2.9" />
+    <PackageReference Include="DevExpress.DataAccess.UI" Version="23.2.9" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="SQLitePCLRaw.bundle_sqlcipher" Version="1.1.14" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Management" Version="9.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.111.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.111.0" />
+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Database\tahiry.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

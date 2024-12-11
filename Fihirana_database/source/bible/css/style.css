@@ -1,0 +1,51 @@
+body::before {
+    content: "Bible";
+    font-size: 130vh;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: -35vh;
+ }
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-image: radial-gradient( farthest-corner at 40px 40px, rgba(33, 29, 28, 0.7) 0%, rgb(77, 77, 77) 100% );
+    /*background-image: url("bg.jpeg");*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+}
+
+blockquote {
+    color: white;
+    font-family: Tahoma, sans-serif;
+    font-size: clamp(30px, 3vw, 60px);
+    width: 80%;
+    margin: 0 auto;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.72);
+}
+ blockquote h1 {
+    font-size: 4rem;
+ }
+ blockquote p {
+    margin-bottom: 0;
+ }
+ 
+ blockquote p::before,
+ blockquote p::after {
+    content: "“";
+    font-family: Georgia;
+    font-size: 8rem;
+    margin: -2rem 0 0 -4rem;
+    position: absolute;
+ }
+ 
+ blockquote p::after {
+    content: "”";
+    margin: -1rem -4rem 0 0;
+ }
+ 
+ blockquote cite {
+    font-size: 1.5rem;
+ }

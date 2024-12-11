@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <title>Projection Fihirana</title>
+    <style>
+        .grid {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <!--partie pour insertion une video comme fond d'écran-->
+        <video id="videoclip" autoplay muted loop>
+            <source src="" type="video/mp4">
+        </video>
+        <!--partie video terminée-->
+        <!--partie pour insertion une image comme fond d'écran
+    et sera on top de la vidéo si activé-->
+        <div id="bg" class="image-container"></div>
+        <div class="lyrics grid animate__animated"></div>
+        <!--partie image terminée-->
+        
+    </div>       
+</body>
+</html>

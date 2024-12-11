@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6871DCE3-45FC-4976-83AD-2339BA3F6CD9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fihirana_database</RootNamespace>
+    <AssemblyName>Fihirana</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fihirana.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Animator, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Animator.1.0.3\lib\net20\Animator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v22.1" />
+    <Reference Include="DevExpress.Data.v22.1" />
+    <Reference Include="DevExpress.Images.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v22.1" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.Utils.v21.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v22.1" />
+    <Reference Include="DevExpress.Sparkline.v22.1.Core" />
+    <Reference Include="DevExpress.Xpo.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraDialogs.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v22.1" />
+    <Reference Include="DevExpress.XtraBars.v22.1" />
+    <Reference Include="DevExpress.XtraGrid.v22.1" />
+    <Reference Include="DevExpress.XtraLayout.v22.1" />
+    <Reference Include="DevExpress.XtraPrinting.v22.1" />
+    <Reference Include="DevExpress.Printing.v22.1.Core" />
+    <Reference Include="DevExpress.XtraRichEdit.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.1\lib\net45\FontAwesome.Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1343.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1343.22\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1343.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1343.22\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1343.22, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1343.22\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SQLite, Version=1.0.111.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.111.0\lib\net46\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.111.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.111.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.111.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.111.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ChantModel.cs" />
+    <Compile Include="Classes\ClassConnection.cs" />
+    <Compile Include="Classes\ClassSettings.cs" />
+    <Compile Include="Classes\ClassFihirana.cs" />
+    <Compile Include="Classes\dataThematique.cs" />
+    <Compile Include="Classes\Effects.cs" />
+    <Compile Include="Classes\GenericQuery.cs" />
+    <Compile Include="Classes\RefreshHelper.cs" />
+    <Compile Include="ConnectionHelperBackup.cs" />
+    <Compile Include="Classes\BibleVerse.cs" />
+    <Compile Include="Classes\Chant.cs" />
+    <Compile Include="FihiranaModelORMCode\Settings.cs" />
+    <Compile Include="FihiranaModelORMCode\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\books.cs" />
+    <Compile Include="FihiranaModelORMCode\books.Designer.cs">
+      <DependentUpon>books.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\HymnalHymnals_CategoryCategories.cs" />
+    <Compile Include="FihiranaModelORMCode\HymnalHymnals_CategoryCategories.Designer.cs">
+      <DependentUpon>HymnalHymnals_CategoryCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_BDS.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_BDS.Designer.cs">
+      <DependentUpon>verses_BDS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_KJV.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_KJV.Designer.cs">
+      <DependentUpon>verses_KJV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_DIEM.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_DIEM.Designer.cs">
+      <DependentUpon>verses_DIEM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_NIV.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_NIV.Designer.cs">
+      <DependentUpon>verses_NIV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_LSG.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_LSG.Designer.cs">
+      <DependentUpon>verses_LSG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\verses_MLG.cs" />
+    <Compile Include="FihiranaModelORMCode\verses_MLG.Designer.cs">
+      <DependentUpon>verses_MLG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddSongForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddSongForm.Designer.cs">
+      <DependentUpon>AddSongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\Category.cs" />
+    <Compile Include="FihiranaModelORMCode\Category.Designer.cs">
+      <DependentUpon>Category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FihiranaModelORMCode\ConnectionHelper.cs" />
+    <Compile Include="FihiranaModelORMCode\Hymnal.cs" />
+    <Compile Include="FihiranaModelORMCode\Hymnal.Designer.cs">
+      <DependentUpon>Hymnal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DisplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DisplayForm.Designer.cs">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fullScreenMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fullScreenMode.Designer.cs">
+      <DependentUpon>fullScreenMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LockForm.Designer.cs">
+      <DependentUpon>LockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\sameSongForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\sameSongForm.Designer.cs">
+      <DependentUpon>sameSongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\testFormB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\testFormB.Designer.cs">
+      <DependentUpon>testFormB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\testForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\testForm.Designer.cs">
+      <DependentUpon>testForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\GridFocusedRowHighlightHelper.cs" />
+    <Compile Include="LogClass.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Trunc\Trash.cs" />
+    <Compile Include="UserControl\DelayedSearchTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\DelayedSearchTextBox.Designer.cs">
+      <DependentUpon>DelayedSearchTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\FihiranaControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\FihiranaControl.Designer.cs">
+      <DependentUpon>FihiranaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\RixCustomGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\RixCustomGrid.Designer.cs">
+      <DependentUpon>RixCustomGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\rixLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl\rixLabel.Designer.cs">
+      <DependentUpon>rixLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\userCtrl2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl\userCtrl2.Designer.cs">
+      <DependentUpon>userCtrl2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddSongForm.resx">
+      <DependentUpon>AddSongForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DisplayForm.resx">
+      <DependentUpon>DisplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fullScreenMode.resx">
+      <DependentUpon>fullScreenMode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LockForm.resx">
+      <DependentUpon>LockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\sameSongForm.resx">
+      <DependentUpon>sameSongForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\testFormB.resx">
+      <DependentUpon>testFormB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\testForm.resx">
+      <DependentUpon>testForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\FihiranaControl.resx">
+      <DependentUpon>FihiranaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\rixLabel.resx">
+      <DependentUpon>rixLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl\userCtrl2.resx">
+      <DependentUpon>userCtrl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="app.config.old" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fihirana.ico" />
+    <Content Include="Libraries\1442428805_office_suite_pro_7.ico" />
+    <None Include="Resources\expand_1886921.svg" />
+    <None Include="Resources\delete.svg" />
+    <None Include="Resources\logo_propre_381399.svg" />
+    <None Include="Resources\black_screen_2205227.svg" />
+    <None Include="Resources\Presentation_4470693.svg" />
+    <None Include="Resources\Play_content_1495055.svg" />
+    <None Include="Resources\iconfinder_Movie_play_video_you_tube_youtube_271505.svg" />
+    <None Include="Resources\projection-svgrepo-com.svg" />
+    <None Include="Resources\demarrage3.jpg" />
+    <None Include="Resources\notebook-school-icon-by-Vexels.svg" />
+    <None Include="Resources\note-book-flat-icon-by-Vexels.svg" />
+    <None Include="Resources\book-pile-icon-by-Vexels.svg" />
+    <None Include="Resources\uaz_logo_white.png" />
+    <None Include="Resources\iconfinder_slice399_2859058.svg" />
+    <None Include="Resources\iconfinder_devices_projector_1287538.svg" />
+    <None Include="Resources\demarrage2.jpg" />
+    <None Include="Resources\adventist-symbol--white.png" />
+    <None Include="Resources\demarrage1.jpg" />
+    <None Include="Resources\iconfinder_Info_Circle_Symbol_Information_Letter_1396823.svg" />
+    <None Include="Resources\iconfinder_free-38_974778.svg" />
+    <None Include="Resources\iconfinder_view-refresh_118801.svg" />
+    <None Include="Resources\iconfinder_simpline_53_2305609.svg" />
+    <None Include="Resources\iconfinder_icon-136-document-edit_314251.svg" />
+    <None Include="Resources\iconfinder_free-27_616650.svg" />
+    <None Include="Resources\iconfinder_Itunes_1026476.svg" />
+    <None Include="Resources\app_composition_editor_music_playlist_songs_sound_icon_256.png" />
+    <None Include="Resources\amaf_sambaina.jpg" />
+    <None Include="Resources\splash_sisiny.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.111.0\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1343.22\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1343.22\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1343.22\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1343.22\build\Microsoft.Web.WebView2.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

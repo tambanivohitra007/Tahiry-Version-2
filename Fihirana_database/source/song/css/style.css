@@ -1,0 +1,60 @@
+/*RINDRA RAZAFINJATOVO*/
+html {
+    font-size: clamp(60px, 6vw, 120px);
+}
+
+body {
+    overflow: hidden;
+}
+
+.grid {
+    position: relative;    
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 3px 5px rgba(0,0,0,0.5), 
+        0px 8px 13px rgba(0,0,0,0.1), 
+        0px 18px 23px rgba(0,0,0,0.1);    
+    line-height: 1;
+    top: 10px;
+}
+
+.lyrics {
+    color: white;
+    animation-duration: 1s;
+}
+
+#parent {
+    background-size: cover;
+    transition: background-image 1s ease-in-out;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#videoclip {
+    position: absolute;
+    z-index: 0;
+    object-fit: fill;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#bg {
+    position: absolute;
+    z-index: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-container {
+    background-size: cover;
+    transition: all 2s ease-in-out;
+}
