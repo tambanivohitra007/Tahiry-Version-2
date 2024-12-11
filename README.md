@@ -8,7 +8,6 @@
 
 - **Hymnals and Bible Integration**: Access a wide variety of hymnals and Bible versions for worship services.
 - **Dual-Screen Support**: Control the content displayed on the main screen and a second display for the congregation.
-- **Customizable Themes**: Switch between dynamic themes and palettes to match your church's style.
 - **Offline Capability**: Fully functional without an internet connection.
 - **DevExpress-Powered UI**: Provides a modern and professional user interface.
 - **Registry-Based Configuration**: Saves settings in the Windows Registry for secure and persistent configuration.
@@ -60,8 +59,10 @@ You can download Tahiry from [fihirana.rindra.org](https://fihirana.rindra.org).
 ## Installation
 
 1. Visit [fihirana.rindra.org](https://fihirana.rindra.org) to download the latest version of Tahiry.
-2. Run the installer and follow the on-screen instructions.
-3. Launch the app and set up your preferences, including themes and data sources.
+2. **Important Note**: Your browser may block the download because the certificate is not recognized, and the publisher is marked as unknown. This is purely a certificate issue and does not pose any harm to your computer.  
+   - To proceed, manually accept the download by clicking **"Keep"** or **"Allow"** in your browser's warning message.
+3. Once the download is complete, run the installer and follow the on-screen instructions.
+4. Launch the app and set up your preferences, including themes and data sources.
 
 ---
 
