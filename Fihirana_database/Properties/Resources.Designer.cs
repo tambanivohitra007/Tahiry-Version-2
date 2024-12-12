@@ -86,52 +86,6 @@ namespace Fihirana_database.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to const element = document.querySelector(&apos;.grid&apos;);
-        ///
-        ///
-        /////Fonction de lancement
-        ///$(&apos;.grid&apos;).ready(function () {
-        ///    const currentImage = localStorage.getItem(&apos;image&apos;);
-        ///    const currentFont = localStorage.getItem(&apos;font&apos;);
-        ///    const currentAlignment = localStorage.getItem(&apos;alignment&apos;);
-        ///    const currentVideo = localStorage.getItem(&apos;video&apos;);
-        ///    const currentColor = localStorage.getItem(&apos;color&apos;);
-        ///
-        ///    $(&apos;.image-container&apos;).css(&apos;background-image&apos;, &apos;url(&quot;&apos; + currentImage + &apos;&quot;)&apos;);
-        ///    $(&apos;#parent&apos;).css(&quot;fon [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string app {
-            get {
-                return ResourceManager.GetString("app", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  $(document).ready(() =&gt; {
-        ///     $(&apos;.grid&apos;).hide();
-        /// });
-        /// //Fonction pour changer la parole
-        /// function _BibleVerse(text, verse, animation) {
-        ///     $(&apos;.grid&apos;).show();
-        ///     $(&apos;.bible&apos;).html(text);            
-        ///     animateCSS(&apos;.grid&apos;, animation);
-        ///     textFit($(&apos;.grid&apos;));
-        ///     $(&apos;.verse&apos;).html(verse);
-        /// }       
-        ///
-        /// //Fonction pour animer le texte en injectant les mots-clés
-        /// const animateCSS = (element, animation, prefix = &apos;animate__&apos;) =&gt;
-        ///   
-        ///     new Promise((resolve, reject) =&gt; {
-        ///         const ani [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string app_bible {
-            get {
-                return ResourceManager.GetString("app_bible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage black_screen_2205227 {
@@ -277,15 +231,19 @@ namespace Fihirana_database.Properties {
         ///&lt;head&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/animate.min.css&quot;&gt;
-        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot; /&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;   
         ///    &lt;title&gt;Projection Fihirana&lt;/title&gt;
         ///    &lt;style&gt;
         ///        .grid {
         ///            -webkit-transition: all 0.5s ease;
         ///            -moz-transition: all 0.5s ease;
-        ///            -o-transition: all 0.5s [rest of string was truncated]&quot;;.
+        ///            -o-transition: all 0.5s ease;
+        ///            transition: all 0.5s ease;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;div id=&quot;pa [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string index {
             get {
@@ -303,11 +261,10 @@ namespace Fihirana_database.Properties {
         ///    &lt;title&gt;Verset biblique&lt;/title&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
-        ///    &lt;blockquote class=&quot;quote grid animate__animated&quot;&gt;
+        ///    &lt;blockquote class=&quot;quote grid animate__animated&quot; id=&quot;parent&quot;&gt;
         ///        &lt;p class=&quot;bible&quot;&gt;&lt;/p&gt;
         ///        &lt;cite class=&quot;verse&quot;&gt;&lt;/cite&gt;
         ///    &lt;/blockquote&gt;
-        ///
         ///&lt;/body&gt;
         ///
         ///&lt;/html&gt;.

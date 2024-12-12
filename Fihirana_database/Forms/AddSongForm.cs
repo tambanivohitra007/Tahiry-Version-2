@@ -16,8 +16,8 @@ namespace Fihirana_database
 {
     public partial class AddSongForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        private Hymnal datasource;
-        private bool edit;
+        private Hymnal datasource; // Holds the current hymn being edited or added
+        private bool edit; // Indicates whether the form is in edit mode
 
         // Constructor for adding a new song
         public AddSongForm()
@@ -34,12 +34,15 @@ namespace Fihirana_database
         {
             InitializeComponent();
             datasource = hymn;
+
+            // Bind controls to hymn data
             _ = txtTitle.DataBindings.Add("Text", datasource, "Title");
             spinNumber.Value = datasource.Number;
             _ = txtClef.DataBindings.Add("Text", datasource, "Key");
             richEdit.RtfText = datasource.Lyrics;
             title.Text = datasource.Title;
             edit = true;
+
             RefreshForm();
             comboCategorie.SelectedIndex = (int)datasource.Category - 1;
             number.Text = datasource.Number.ToString();
@@ -60,7 +63,7 @@ namespace Fihirana_database
             Close();
         }
 
-        // Event handler for verse button click
+        // Event handler for highlighting verses
         private void iVerse_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Regex expr = new Regex("[0-9]");
@@ -92,7 +95,7 @@ namespace Fihirana_database
             }
         }
 
-        // Event handler for select list item click
+        // Event handler for list item selection
         private void iSelect_ListItemClick(object sender, DevExpress.XtraBars.ListItemClickEventArgs e)
         {
             DocumentRange selection = richEdit.Document.Selection;
@@ -109,7 +112,7 @@ namespace Fihirana_database
             number.Text = spinNumber.Text;
         }
 
-        // Event handler for reset button click
+        // Event handler for resetting inputs
         private void iReset_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearControls();
@@ -122,11 +125,12 @@ namespace Fihirana_database
             txtClef.Text = string.Empty;
         }
 
-        // Event handler for save button click
+        // Event handler for saving to the database
         private void iSaveDatabase_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ClearFormatting();
 
+            // Validate inputs
             if (comboCategorie.EditValue == null)
             {
                 dxError.SetError(comboCategorie, "Veuillez renseigner ce champ! ");
@@ -143,6 +147,7 @@ namespace Fihirana_database
 
             if (!edit)
             {
+                // Check for duplicate hymn numbers
                 var existingHymn = ClassFihirana.SessionHymnal.Query<Hymnal>()
                     .FirstOrDefault(a => a.Number == (long)spinNumber.Value && a.Category == comboCategorie.SelectedIndex + 1);
 
@@ -153,6 +158,7 @@ namespace Fihirana_database
                     return;
                 }
 
+                // Save new hymn
                 using Session session = new Session();
                 Hymnal hm = new Hymnal(session)
                 {
@@ -163,6 +169,8 @@ namespace Fihirana_database
                     Key = txtClef.Text
                 };
                 hm.Save();
+
+                // Reset inputs
                 title.Text = txtTitle.Text;
                 number.Text = spinNumber.Text;
                 richEdit.RtfText = string.Empty;
@@ -327,6 +335,7 @@ namespace Fihirana_database
                         Key = txtClef.Text
                     };
                     hm.Save();
+
                     title.Text = txtTitle.Text;
                     number.Text = spinNumber.Text;
                     richEdit.RtfText = string.Empty;
@@ -339,5 +348,4 @@ namespace Fihirana_database
             }
         }
     }
-
 }

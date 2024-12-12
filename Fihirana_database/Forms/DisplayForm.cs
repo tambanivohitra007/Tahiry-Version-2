@@ -3,8 +3,12 @@ using DevExpress.Xpo;
 using Fihirana_database.Classes;
 using Fihirana_database.fihirana;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,12 +16,16 @@ namespace Fihirana_database.Forms
 {
     public partial class DisplayForm : Form
     {
+        #region Variable Declarations
 
-        #region variables declarations
+        // Delegate to send messages
         public delegate void Message(string str);
+
+        // Static properties for display settings and states
         public static int DisplayTab { get; set; }
         private static string message;
-        private bool isBibleOrSong = false; //False means song
+        private bool isBibleOrSong = false; // False means song, true means Bible
+
         public static string Lyrics { get; set; }
         public static string Title { get; set; }
         public static string Category { get; set; }
@@ -29,30 +37,39 @@ namespace Fihirana_database.Forms
         public static string ImagePath { get; set; }
         public static string VideoPath { get; set; }
         public static int[] Couleur { get; set; } = new int[3];
+
+        // Events for user interaction
         public static event KeyEventHandler PreviousOrNext;
         public static event KeyEventHandler CloseProjection;
+
         #endregion
+
         public DisplayForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Asynchronously initializes the WebView component.
+        /// </summary>
         private async Task InitializeAsync() => await webView.EnsureCoreWebView2Async(null);
 
+        /// <summary>
+        /// Configures WebView settings to disable default browser features.
+        /// </summary>
         public void InitBrowser()
         {
-            webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
-            webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            //webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            //webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            //webView.CoreWebView2.Settings.AreDevToolsEnabled = true;
+
         }
 
         /// <summary>
-        /// Keystroke to be used when closing the display
+        /// Handles keyboard shortcuts for closing or navigating the display.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DisplayForm_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Escape || (e.Modifiers == Keys.Alt && e.KeyCode == Keys.F4))
             {
                 CloseProjection?.Invoke(null, null);
@@ -63,14 +80,11 @@ namespace Fihirana_database.Forms
             {
                 PreviousOrNext?.Invoke(sender, e);
             }
-
         }
 
         /// <summary>
-        /// Paint the Adventist Logo to the display
+        /// Paints the Adventist logo on the display panel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void panelLogo_Paint(object sender, PaintEventArgs e)
         {
             logoSidebar.Visible = false;
@@ -79,47 +93,50 @@ namespace Fihirana_database.Forms
             e.Graphics.DrawImage(bitmap, rect);
         }
 
-        #region javascript
+        #region JavaScript Integration
 
         /// <summary>
-        /// Handle Font weight and Font style of the display
+        /// Updates font weight and style dynamically in the display.
         /// </summary>
-        /// <returns></returns>
         private async Task checkFontWeightStyle()
         {
             try
             {
-                //bold
                 string isBold = ClassFihirana.IsBold ? "700" : "";
-                string script = $@" $('.grid').css('font-weight', '{isBold}');";
+                string script = $"$('.grid').css('font-weight', '{isBold}');";
                 _ = await webView.ExecuteScriptAsync(script);
-
-                //italic
 
                 string isItalic = ClassFihirana.IsItalic ? "italic" : "";
-                script = $@" $('.grid').css('font-style', '{isItalic}');";
+                script = $"$('.grid').css('font-style', '{isItalic}');";
                 _ = await webView.ExecuteScriptAsync(script);
             }
-            catch { }
+            catch
+            {
+                // Log or handle errors silently
+            }
         }
 
+        /// <summary>
+        /// Sets the font family dynamically in the display.
+        /// </summary>
         private async Task _Font(string fontName)
         {
             try
             {
-                string script = $@"$('.grid').css('font-family', '{fontName}');";
+                string script = $"$('.grid').css('font-family', '{fontName}');";
                 _ = await webView.CoreWebView2.ExecuteScriptAsync(script);
             }
-            catch { }
+            catch
+            {
+                // Log or handle errors silently
+            }
         }
 
         #endregion
 
         /// <summary>
-        /// When the display closed
+        /// Cleans up resources when the form is closed.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DisplayForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             CloseProjection?.Invoke(sender, null);
@@ -127,33 +144,76 @@ namespace Fihirana_database.Forms
         }
 
         /// <summary>
-        /// When the Display loads, 
+        /// Initializes the display form and loads the appropriate resources.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void DisplayForm_Load(object sender, EventArgs e)
         {
-
             await InitializeAsync();
             InitBrowser();
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"source");
             if (DisplayTab == 0)
-                LoadSource(
-                   Properties.Resources.index,
-                   Properties.Resources.style,
-                   Properties.Resources.app
-               );
-            if (DisplayTab == 1)
-                LoadSource(
-                    Properties.Resources.index_bible_html,
-                    Properties.Resources.style_bible_css,
-                    Properties.Resources.app_bible
-                );
+            {
+                string htmlSource = Path.Combine(path, @"song", "index.html");
+
+                List<string> cssFiles = new List<string>
+                {
+                    Path.Combine(path, @"song\css", "animate.min.css"),
+                    Path.Combine(path, @"song\css", "style.css"),
+                };
+
+                List<string> jsFiles = new List<string>
+                {
+                    Path.Combine(path, @"song\js", "jquery.min.js"),
+                    Path.Combine(path, @"song\js", "textFit.min.js"),
+                    Path.Combine(path, @"song", "app.js"),
+                };
+
+
+                LoadSource(htmlSource, cssFiles, jsFiles);
+            }
+            else if (DisplayTab == 1)
+            {
+                string htmlSource = Path.Combine(path, @"bible", "index.html");
+
+                List<string> cssFiles = new List<string>
+                {
+                    Path.Combine(path, @"bible\css", "animate.min.css"),
+                    Path.Combine(path, @"bible\css", "style.css"),
+                };
+
+                List<string> jsFiles = new List<string>
+                {
+                    Path.Combine(path, @"bible\js", "jquery.min.js"),
+                    Path.Combine(path, @"bible\js", "textFit.min.js"),
+                    Path.Combine(path, @"bible", "app.js"),
+                };
+
+                LoadSource(htmlSource, cssFiles, jsFiles);
+            }
+
+            //string htmlSource = Path.Combine(path, @"bible", "index.html");
+
+            //List<string> cssFiles = new List<string>
+            //    {
+            //        Path.Combine(path, @"bible\css", "animate.min.css"),
+            //        Path.Combine(path, @"bible\css", "style.css"),
+            //    };
+
+            //List<string> jsFiles = new List<string>
+            //    {
+            //        Path.Combine(path, @"bible\js", "jquery.min.js"),
+            //        Path.Combine(path, @"bible\js", "textFit.min.js"),
+            //        Path.Combine(path, @"bible", "app.js"),
+            //    };
+
+            //LoadSource(htmlSource, cssFiles, jsFiles);
+
             InitMainFormHandlers();
-            initSettings();
+            //initSettings();
         }
 
         /// <summary>
-        /// Initialize Mainform handlers
+        /// Initializes event handlers for MainForm interactions.
         /// </summary>
         private void InitMainFormHandlers()
         {
@@ -162,6 +222,7 @@ namespace Fihirana_database.Forms
                 webView.Dispose();
                 Close();
             };
+
             MainForm.ChangeFont += async (s, e) =>
             {
                 if (!ClassFihirana.isFontReady)
@@ -170,6 +231,7 @@ namespace Fihirana_database.Forms
                     webView.Refresh();
                 }
             };
+
             MainForm.GoNear += (s, e) => changeAlignement(1);
             MainForm.GoFar += (s, e) => changeAlignement(2);
             MainForm.GoCenter += (s, e) => changeAlignement(3);
@@ -180,7 +242,6 @@ namespace Fihirana_database.Forms
             MainForm.ChangeImageBackground += (s, e) => changeImage(ImagePath);
             MainForm.ChangeVideoBackground += (s, e) => changeVideo(VideoPath);
             MainForm.HideHeader += (s, e) => logoSidebar.Visible = isHide;
-            //MainForm.SetTitle += (s, e) => showInfo(isHide);
             MainForm.BlackScreen += (s, e) => webView.Visible = !LogClass.isBlackScreen;
             MainForm.showLogo += (s, e) =>
             {
@@ -196,235 +257,334 @@ namespace Fihirana_database.Forms
                     panelLogo.Visible = false;
                     webView.Visible = true;
                 }
-
             };
-            MainForm.SetColor += (s, e) => webView.ExecuteScriptAsync($"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]})");
-            MainForm.clickRefresh += async (s, el) =>
+
+            MainForm.SetColor += (s, e) =>
+                webView.ExecuteScriptAsync($"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]})");
+
+            MainForm.clickRefresh += async (s, e) =>
             {
                 try
-                {
-                    //await InitializeAsync();
-                    initSettings();
+                {                    
                     if (webView.CoreWebView2 != null)
                     {
+                        Lyrics = Lyrics.Replace("\n", "<br>").Replace("\"", "'");
                         if (MainForm.isSongOrBible)
                         {
-                            Lyrics = Lyrics.Replace("\n", "<br>");
-                            Lyrics = Lyrics.Replace("\"", "'");
                             _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Lyrics(\"{Lyrics}\", \"{Animation}\", true)");
                         }
                         else
                         {
-                            Lyrics = Lyrics.Replace("\n", "<br>");
-                            Lyrics = Lyrics.Replace("\"", "'");
-                            string delimiter = "<br>";
-                            string[] parts = Lyrics.Split(new string[] { delimiter }, StringSplitOptions.None);
-
+                            string[] parts = Lyrics.Split(new[] { "<br>" }, StringSplitOptions.None);
                             _ = await webView.CoreWebView2.ExecuteScriptAsync($"_BibleVerse(\"{parts[2]}\", \"{parts[0]}\", \"{Animation}\")");
                         }
                     }
-
                 }
-                catch { }
-            };
-            MainForm.SelectBackground += (s, e) =>
-            {
-                try
+                catch
                 {
-                    if (webView.CoreWebView2 != null)
-                    {
-                        //await InitializeAsync();
-                        switch (DisplayTab)
-                        {
-                            case 0:
-                                LoadSource(
-                                    Properties.Resources.index,
-                                    Properties.Resources.style,
-                                    Properties.Resources.app
-                                );
-                                break;
-                            case 1:
-                                LoadSource(
-                                    Properties.Resources.index_bible_html,
-                                    Properties.Resources.style_bible_css,
-                                    Properties.Resources.app_bible
-                                );
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
+                    // Log or handle errors silently
                 }
-                catch { }
-
             };
+
+            //MainForm.clickRefresh += async (s, e) =>
+            //{
+            //    try
+            //    {
+            //        if (webView.CoreWebView2 != null)
+            //        {
+            //            Lyrics = Lyrics.Replace("\n", "<br>").Replace("\"", "'");
+
+            //            // Prepare arguments for _BibleVerse
+            //            string verseText = Lyrics;
+            //            string verseReference = MainForm.isSongOrBible ? "" : ""; // Adjust the verse reference as needed
+
+            //            _ = await webView.CoreWebView2.ExecuteScriptAsync($"_BibleVerse(\"{verseText}\", \"{verseReference}\", \"{Animation}\")");
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine($"Error: {ex.Message}");
+            //        // Log or handle errors silently
+            //    }
+            //};
         }
+
+        /// <summary>
+        /// Changes text alignment dynamically in the display.
+        /// </summary>
         private void changeAlignement(int index)
         {
-            switch (index)
+            string alignment = index switch
             {
-                case 1: _ = webView.ExecuteScriptAsync($"_Alignment(\"left\")"); break;
-                case 2: _ = webView.ExecuteScriptAsync($"_Alignment(\"right\")"); break;
-                case 3: _ = webView.ExecuteScriptAsync($"_Alignment(\"center\")"); break;
-                default:
-                    break;
-            }
+                1 => "left",
+                2 => "right",
+                3 => "center",
+                _ => ""
+            };
+            _ = webView.ExecuteScriptAsync($"_Alignment(\"{alignment}\")");
         }
 
         /// <summary>
-        /// Set image as background
+        /// Sets the background image for the display.
         /// </summary>
-        /// <param name="imagePath"></param>
         private async void changeImage(string imagePath)
         {
-
             try
             {
-                string img = imagePath;
-
                 if (!string.IsNullOrEmpty(imagePath) && !imagePath.Equals("none"))
                 {
-                    // Convert image to Base64
                     byte[] imageArray = File.ReadAllBytes(imagePath);
                     string base64Image = "data:image/jpeg;base64," + Convert.ToBase64String(imageArray);
-                    img = base64Image;
-                }
-                else
-                    img = imagePath;
-
-                _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Image(\"{img}\")");
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// Set video as background
-        /// </summary>
-        /// <param name="videoPath"></param>
-        private async void changeVideo(string videoPath)
-        {
-            try
-            {
-                if (videoPath != string.Empty)
-                {
-                    byte[] videoArray = File.ReadAllBytes(videoPath);
-                    string base64VideoRepresentation = Convert.ToBase64String(videoArray);
-                    _ = await webView.ExecuteScriptAsync($"_Video(\"data:video/mp4;base64,{base64VideoRepresentation}\")");
+                    _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Image(\"{base64Image}\")");
                 }
                 else
                 {
-                    _ = await webView.ExecuteScriptAsync($"_Video(\"{string.Empty}\")");
+                    _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Image(\"{imagePath}\")");
                 }
             }
             catch
             {
-                //MessageBox.Show("The file is too big to be used. Please find another file.", "ERROR",
-                //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return;
+                // Log or handle errors silently
             }
         }
 
         /// <summary>
-        /// Load source to be displayed
+        /// Sets the background video for the display.
         /// </summary>
-        /// <param name="source">HTML file</param>
-        /// <param name="css">related css</param>
-        /// <param name="js">related javascript</param>
-        public void LoadSource(string source, string css, string js)
-        {
-            isBibleOrSong = false;
-
-            string animate_css = Properties.Resources.animate_min_css;
-            string jquery_js = Properties.Resources.jquery_min_js;
-            string textFit_js = Properties.Resources.textFit_min_js;
-
-            // Combine all content into the HTML
-            source = source.Replace("</head>", $"<style>{animate_css}</style></head>");
-            source = source.Replace("</head>", $"<style>{css}</style></head>");
-            source = source.Replace("</body>", $"<script>{jquery_js}</script></body>");
-            source = source.Replace("</body>", $"<script>{textFit_js}</script></body>");
-            source = source.Replace("</body>", $"<script>{js}</script></body>");
-            // Load modified HTML content into WebView2 control
-            webView.CoreWebView2.NavigateToString(source);
-
-            initSettings();
-        }
-
-        /// <summary>
-        /// Load settings from the database 
-        /// </summary>
-
-        private async void initSettings()
+        private async void changeVideo(string videoPath)
         {
             try
             {
-                //alignement
-                Settings sess = loadSetting(2);
-                string valiny = !string.IsNullOrEmpty(sess.Value) ? sess.Value : "";
-                valiny = valiny == "1" ? "left" : valiny == "2" ? "right" : "center";
-                _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Alignment('{valiny}')");
-
-                //Font
-                sess = loadSetting(3);
-                valiny = !string.IsNullOrEmpty(sess.Value) ? sess.Value : "";
-                await _Font(valiny);
-
-                //bold
-                sess = loadSetting(4);
-                valiny = !string.IsNullOrEmpty(sess.Value) ? sess.Value : "";
-                string isBold = valiny == "True" ? "700" : "";
-                string script = $@" $('.grid').css('font-weight', '{isBold}');";
-                _ = await webView.CoreWebView2.ExecuteScriptAsync(script);
-
-                //italic
-                sess = loadSetting(5);
-                valiny = !string.IsNullOrEmpty(sess.Value) ? sess.Value : "";
-                string isItalic = valiny == "True" ? "italic" : "";
-                script = $@" $('.grid').css('font-style', '{isItalic}');";
-                _ = await webView.CoreWebView2.ExecuteScriptAsync(script);
-
-                //image
-                sess = loadSetting(6);
-                valiny = !string.IsNullOrEmpty(sess.Value) && DisplayTab == 0 ? sess.Value : "";
-                changeImage(valiny);
-
-                //video
-                sess = loadSetting(7);
-                valiny = !string.IsNullOrEmpty(sess.Value) && DisplayTab == 0 ? sess.Value : "";
-                changeVideo(valiny);
-
-                //titlie heading
-                logoSidebar.Visible = isHide;
-
-                //couleur
-                sess = loadSetting(9);
-                valiny = !string.IsNullOrEmpty(sess.Value) ? sess.Value : "";
-
-                string[] couleurs = valiny.Split('-');
-                Couleur[0] = Convert.ToInt32(couleurs[0]);
-                Couleur[1] = Convert.ToInt32(couleurs[1]);
-                Couleur[2] = Convert.ToInt32(couleurs[2]);
-                _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]})");
+                if (!string.IsNullOrEmpty(videoPath))
+                {
+                    byte[] videoArray = File.ReadAllBytes(videoPath);
+                    string base64Video = Convert.ToBase64String(videoArray);
+                    _ = await webView.ExecuteScriptAsync($"_Video(\"data:video/mp4;base64,{base64Video}\")");
+                }
             }
-            catch { }
+            catch
+            {
+                // Log or handle errors silently
+            }
         }
 
         /// <summary>
-        /// Retrieve particular settings based on its index
+        /// Loads HTML, CSS, and JavaScript resources into the display.
         /// </summary>
-        /// <param name="index">Index of the setting</param>
-        /// <returns>Sesttings</returns>
+        /// <summary>
+        /// Loads the HTML source into the WebView2 and dynamically injects CSS and JavaScript.
+        /// </summary>
+        /// <param name="source">The base HTML source string.</param>
+        /// <param name="css">Additional CSS to inject.</param>
+        /// <param name="js">Additional JavaScript to inject.</param>
+        //public void LoadSource(string source, string css, string js)
+        //{
+        //    if (string.IsNullOrWhiteSpace(source))
+        //    {
+        //        MessageBox.Show("HTML source cannot be null or empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        // Ensure WebView2 is ready
+        //        if (webView.CoreWebView2 == null)
+        //        {
+        //            MessageBox.Show("WebView2 is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            return;
+        //        }
+
+        //        // Load required resources from project resources
+        //        string animateCss = Properties.Resources.animate_min_css;
+        //        string jqueryJs = Properties.Resources.jquery_min_js;
+        //        string textFitJs = Properties.Resources.textFit_min_js;
+
+        //        // Inject CSS and JS into the HTML source
+        //        source = source.Replace("</head>", $"<style>{animateCss}</style></head>")
+        //                       .Replace("</head>", $"<style>{css}</style></head>")
+        //                       .Replace("</body>", $"<script>{jqueryJs}</script></body>")
+        //                       .Replace("</body>", $"<script>{textFitJs}</script></body>")
+        //                       .Replace("</body>", $"<script>{js}</script></body>");
+
+        //        // Navigate to the modified HTML string
+        //        webView.CoreWebView2.NavigateToString(source);
+
+        //        // Call settings initialization if required
+        //        initSettings();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Failed to load source: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        public async void LoadSource(string htmlFilePath, List<string> cssFiles, List<string> jsFiles, string customJsFilePath = null)
+        {
+            if (string.IsNullOrWhiteSpace(htmlFilePath) || !File.Exists(htmlFilePath))
+            {
+                MessageBox.Show("HTML file cannot be null or empty and must exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                // Ensure WebView2 is ready
+                if (webView.CoreWebView2 == null)
+                {
+                    MessageBox.Show("WebView2 is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Read the HTML source from the file
+                string source = File.ReadAllText(htmlFilePath);
+
+                // Build the CSS block dynamically
+                var cssBlock = new StringBuilder();
+                foreach (var cssFile in cssFiles)
+                {
+                    if (File.Exists(cssFile))
+                    {
+                        string cssContent = File.ReadAllText(cssFile);
+                        cssBlock.AppendLine($"<style>{cssContent}</style>");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"CSS file not found: {cssFile}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
+                // Build the JavaScript block dynamically
+                var jsBlock = new StringBuilder();
+                foreach (var jsFile in jsFiles)
+                {
+                    if (File.Exists(jsFile))
+                    {
+                        string jsContent = File.ReadAllText(jsFile);
+                        jsBlock.AppendLine($"<script>{jsContent}</script>");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"JavaScript file not found: {jsFile}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
+                // Add custom JavaScript if provided
+                if (!string.IsNullOrWhiteSpace(customJsFilePath) && File.Exists(customJsFilePath))
+                {
+                    string customJsContent = File.ReadAllText(customJsFilePath);
+                    jsBlock.AppendLine($"<script>{customJsContent}</script>");
+                }
+
+                // Inject CSS and JavaScript into the HTML source
+                source = source.Replace("</head>", $"{cssBlock}</head>")
+                               .Replace("</body>", $"{jsBlock}</body>");
+
+                // Navigate to the modified HTML string
+                webView.CoreWebView2.NavigateToString(source);
+
+                // Call settings initialization if required
+                await initSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load source: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private Dictionary<int, string> cachedSettings;
+        private string currentImage = string.Empty; // Tracks the currently displayed image
+        private string currentVideo = string.Empty; // Tracks the currently displayed video
+
+        private void CacheSettings()
+        {
+            cachedSettings = new Dictionary<int, string>();
+            for (int i = 1; i <= 9; i++) // Assuming 9 settings
+            {
+                var setting = loadSetting(i);
+                cachedSettings[i] = setting?.Value;
+            }
+        }
+
+        /// <summary>
+        /// Loads and applies settings for the display from the database.
+        /// </summary>
+        private async Task initSettings()
+        {
+            if (webView.CoreWebView2 == null) return;
+
+            try
+            {
+                // Cache settings
+                CacheSettings();
+
+                // Prepare script for combined execution
+                string alignment = cachedSettings[2] switch
+                {
+                    "1" => "left",
+                    "2" => "right",
+                    _ => "center"
+                };
+
+                string isBold = cachedSettings[4] == "True" ? "700" : "";
+                string isItalic = cachedSettings[5] == "True" ? "italic" : "";
+
+                string colorScript = string.Empty;
+                if (!string.IsNullOrEmpty(cachedSettings[9]))
+                {
+                    string[] colors = cachedSettings[9].Split('-');
+                    Couleur[0] = int.Parse(colors[0]);
+                    Couleur[1] = int.Parse(colors[1]);
+                    Couleur[2] = int.Parse(colors[2]);
+                    colorScript = $"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]});";
+                }
+
+                string script = $@"
+                    _Alignment('{alignment}');
+                    $('.grid').css('font-weight', '{isBold}');
+                    $('.grid').css('font-style', '{isItalic}');
+                    {colorScript}
+                ";
+                await webView.CoreWebView2.ExecuteScriptAsync(script);
+
+                // Image and video updates
+                if (!string.IsNullOrEmpty(cachedSettings[5]) && DisplayTab == 0)
+                {
+                    if (!currentImage.Equals(cachedSettings[5]))
+                    {
+                        changeImage(cachedSettings[5]);
+                        currentImage = cachedSettings[5];
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(cachedSettings[6]) && DisplayTab == 0)
+                {
+                    if (!currentVideo.Equals(cachedSettings[6]))
+                    {
+                        changeVideo(cachedSettings[6]);
+                        currentVideo = cachedSettings[6];
+                    }
+                }
+
+                // Update UI
+                logoSidebar.Visible = isHide;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error in initSettings: {ex.Message}");
+            }
+        }
+
+
+        /// <summary>
+        /// Retrieves settings from the database based on the index.
+        /// </summary>
         private Settings loadSetting(int index)
         {
             try
             {
-                Session session = new Session
-                {
-                    ConnectionString = XpoDefault.ConnectionString
-                };
-                return session.FindObject<Settings>(CriteriaOperator.Parse($"ID = {index}")); ;
-
+                Session session = new Session { ConnectionString = XpoDefault.ConnectionString };
+                return session.FindObject<Settings>(CriteriaOperator.Parse($"ID = {index}"));
             }
             catch
             {
@@ -432,4 +592,5 @@ namespace Fihirana_database.Forms
             }
         }
     }
+
 }

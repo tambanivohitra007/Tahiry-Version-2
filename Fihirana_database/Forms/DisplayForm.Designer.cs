@@ -1,4 +1,6 @@
-﻿namespace Fihirana_database.Forms
+﻿using Microsoft.Web.WebView2.WinForms;
+
+namespace Fihirana_database.Forms
 {
     partial class DisplayForm
     {
@@ -105,7 +107,8 @@
 
         #endregion
 
-        private Microsoft.Web.WebView2.WinForms.WebView2 webView;
+        //private Microsoft.Web.WebView2.WinForms.WebView2 webView;
+        private WebView2 webView;
         private System.Windows.Forms.Panel panelLogo;
         private DevExpress.XtraEditors.PictureEdit logoSidebar;
     }

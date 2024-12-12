@@ -1544,7 +1544,8 @@ namespace Fihirana_database
 
         private void iPresent_DownChanged(object sender, ItemClickEventArgs e)
         {
-            if (gridV.DataRowCount > 0 && barListProjector.DataIndex > -1 && iProjectToScreen.Down)
+            //gridV.DataRowCount > 0 &&
+            if (barListProjector.DataIndex > -1 && iProjectToScreen.Down)
             {
                 iBlackScreen.Enabled = true;
                 iClearProject.Enabled = true;
