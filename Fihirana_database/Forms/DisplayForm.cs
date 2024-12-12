@@ -59,8 +59,8 @@ namespace Fihirana_database.Forms
         /// </summary>
         public void InitBrowser()
         {
-            //webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
-            //webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            webView.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             //webView.CoreWebView2.Settings.AreDevToolsEnabled = true;
 
         }
@@ -168,7 +168,6 @@ namespace Fihirana_database.Forms
                     Path.Combine(path, @"song", "app.js"),
                 };
 
-
                 LoadSource(htmlSource, cssFiles, jsFiles);
             }
             else if (DisplayTab == 1)
@@ -190,23 +189,6 @@ namespace Fihirana_database.Forms
 
                 LoadSource(htmlSource, cssFiles, jsFiles);
             }
-
-            //string htmlSource = Path.Combine(path, @"bible", "index.html");
-
-            //List<string> cssFiles = new List<string>
-            //    {
-            //        Path.Combine(path, @"bible\css", "animate.min.css"),
-            //        Path.Combine(path, @"bible\css", "style.css"),
-            //    };
-
-            //List<string> jsFiles = new List<string>
-            //    {
-            //        Path.Combine(path, @"bible\js", "jquery.min.js"),
-            //        Path.Combine(path, @"bible\js", "textFit.min.js"),
-            //        Path.Combine(path, @"bible", "app.js"),
-            //    };
-
-            //LoadSource(htmlSource, cssFiles, jsFiles);
 
             InitMainFormHandlers();
             //initSettings();
@@ -285,28 +267,6 @@ namespace Fihirana_database.Forms
                     // Log or handle errors silently
                 }
             };
-
-            //MainForm.clickRefresh += async (s, e) =>
-            //{
-            //    try
-            //    {
-            //        if (webView.CoreWebView2 != null)
-            //        {
-            //            Lyrics = Lyrics.Replace("\n", "<br>").Replace("\"", "'");
-
-            //            // Prepare arguments for _BibleVerse
-            //            string verseText = Lyrics;
-            //            string verseReference = MainForm.isSongOrBible ? "" : ""; // Adjust the verse reference as needed
-
-            //            _ = await webView.CoreWebView2.ExecuteScriptAsync($"_BibleVerse(\"{verseText}\", \"{verseReference}\", \"{Animation}\")");
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine($"Error: {ex.Message}");
-            //        // Log or handle errors silently
-            //    }
-            //};
         }
 
         /// <summary>

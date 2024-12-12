@@ -65,6 +65,7 @@ namespace Fihirana_database
         public static event EventHandler SelectBackground;
         public static event EventHandler changeColorSkin;
         public static event EventHandler InitializeCheckStsyle;
+        public static event EventHandler ChangeTab;
         public static bool isSongOrBible = false; //If true then isSongOrBible = song, otherwise, isSongOrBible = verse
         private List<Chant> getParoles;
         private FihiranaControl fihirana;
@@ -2004,6 +2005,8 @@ namespace Fihirana_database
                 ribbonOutil.Enabled = false;
                 ribbonBackground.Enabled = false;
             }
+
+            ChangeTab?.Invoke(sender, e);
         }
 
         private void tileViewVerset_DoubleClick(object sender, EventArgs e)
