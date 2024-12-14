@@ -84,3 +84,6 @@ Tahiry uses the Windows Registry to securely save application settings:
 using RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\\RindraSoftware\\Tahiry");
 registryKey?.SetValue("Provider", "SQLite");
 registryKey?.SetValue("DataSource", $"{SpecialFolderPath}\\Rindrasoftware\\Tahiry\\tahiry.db");
+
+---
+Tahiry © 2024 by Rindra Razafinjatovo is licensed under CC BY-NC 4.0 
