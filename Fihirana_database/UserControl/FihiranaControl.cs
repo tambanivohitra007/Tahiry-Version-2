@@ -1,3 +1,11 @@
+// ------------------------------------------------------------
+// Author: Rindra Razafinjatovo
+// Created on: 2018
+// Last Modified: Dec 2024
+// Project: Tahiry
+// Description: A collection of Bible and Hymnals to streamline and enhance worship presentations for churches.
+// ------------------------------------------------------------
+
 ﻿using DevExpress.Data.Filtering;
 using DevExpress.LookAndFeel;
 using DevExpress.Xpo;
@@ -80,7 +88,7 @@ namespace Fihirana_database.UserControl
             initCommand();
             refreshData();
             getListCategory();
-            dataThematique.initAccordion(accordionCtrl);
+            dataThematique.InitAccordion(accordionCtrl);
             _ = accordionCtrl.ExpandAll();
             server = new RichEditDocumentServer();
             MainForm.changeColorSkin += (s, e) => BackColorChanged();

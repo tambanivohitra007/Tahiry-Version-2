@@ -1,4 +1,14 @@
-﻿using Newtonsoft.Json.Linq;
+// ------------------------------------------------------------
+// Author: Rindra Razafinjatovo
+// Created on: 2018
+// Last Modified: Dec 2024
+// Project: Tahiry
+// Description: A collection of Bible and Hymnals to streamline and enhance worship presentations for churches.
+// ------------------------------------------------------------
+
+﻿using DevExpress.XtraEditors;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +17,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Fihirana_database.Classes
 {
@@ -15,7 +26,7 @@ namespace Fihirana_database.Classes
         private static string currentVersion = "2.0.0.6";
         private static string updateCheckUrl = "https://fihirana.rindra.org/version.json";
 
-        public static async void CheckForUpdates()
+        public static async Task CheckForUpdatesAsync()
         {
             try
             {
@@ -25,28 +36,50 @@ namespace Fihirana_database.Classes
                     string json = await client.GetStringAsync(updateCheckUrl);
                     JObject updateInfo = JObject.Parse(json);
 
-                    string latestVersion = updateInfo["version"].ToString();
-                    string downloadUrl = updateInfo["url"].ToString();
-                    string releaseNotes = updateInfo["releaseNotes"].ToString();
+                    string latestVersion = updateInfo["version"]?.ToString();
+                    string downloadUrl = updateInfo["url"]?.ToString();
+                    string releaseNotes = updateInfo["releaseNotes"]?.ToString();
 
-                    if (string.Compare(currentVersion, latestVersion) < 0)
+                    if (string.IsNullOrWhiteSpace(latestVersion) || string.IsNullOrWhiteSpace(downloadUrl))
                     {
-                        Console.WriteLine($"New version available: {latestVersion}");
-                        Console.WriteLine(releaseNotes);
+                        XtraMessageBox.Show("Failed to retrieve update information.", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
 
-                        DownloadAndInstallUpdate(downloadUrl);
+                    if (string.Compare(currentVersion, latestVersion, StringComparison.Ordinal) < 0)
+                    {
+                        DialogResult result = XtraMessageBox.Show(
+                            $"A new version ({latestVersion}) is available.\n\nRelease Notes:\n{releaseNotes}\n\nDo you want to download and install the update?",
+                            "Update Available",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Information
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            DownloadAndInstallUpdate(downloadUrl);
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("You already have the latest version.");
+                        XtraMessageBox.Show("You already have the latest version.", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
+            catch (HttpRequestException ex)
+            {
+                XtraMessageBox.Show($"Network error while checking for updates: {ex.Message}", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (JsonException ex)
+            {
+                XtraMessageBox.Show($"Error parsing update information: {ex.Message}", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error checking for updates: {ex.Message}");
+                XtraMessageBox.Show($"Unexpected error: {ex.Message}", "Update Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private static void DownloadAndInstallUpdate(string downloadUrl)
         {

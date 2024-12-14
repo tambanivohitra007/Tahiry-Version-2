@@ -1,3 +1,11 @@
+// ------------------------------------------------------------
+// Author: Rindra Razafinjatovo
+// Created on: 2018
+// Last Modified: Dec 2024
+// Project: Tahiry
+// Description: A collection of Bible and Hymnals to streamline and enhance worship presentations for churches.
+// ------------------------------------------------------------
+
 ﻿using DevExpress.Data.Filtering;
 using DevExpress.Xpo;
 using Fihirana_database.Classes;
@@ -150,48 +158,38 @@ namespace Fihirana_database.Forms
         {
             await InitializeAsync();
             InitBrowser();
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"source");
-            if (DisplayTab == 0)
+
+            string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"source");
+            string contentType = DisplayTab == 0 ? "song" : DisplayTab == 1 ? "bible" : null;
+
+            if (contentType != null)
             {
-                string htmlSource = Path.Combine(path, @"song", "index.html");
-
-                List<string> cssFiles = new List<string>
-                {
-                    Path.Combine(path, @"song\css", "animate.min.css"),
-                    Path.Combine(path, @"song\css", "style.css"),
-                };
-
-                List<string> jsFiles = new List<string>
-                {
-                    Path.Combine(path, @"song\js", "jquery.min.js"),
-                    Path.Combine(path, @"song\js", "textFit.min.js"),
-                    Path.Combine(path, @"song", "app.js"),
-                };
-
-                LoadSource(htmlSource, cssFiles, jsFiles);
-            }
-            else if (DisplayTab == 1)
-            {
-                string htmlSource = Path.Combine(path, @"bible", "index.html");
-
-                List<string> cssFiles = new List<string>
-                {
-                    Path.Combine(path, @"bible\css", "animate.min.css"),
-                    Path.Combine(path, @"bible\css", "style.css"),
-                };
-
-                List<string> jsFiles = new List<string>
-                {
-                    Path.Combine(path, @"bible\js", "jquery.min.js"),
-                    Path.Combine(path, @"bible\js", "textFit.min.js"),
-                    Path.Combine(path, @"bible", "app.js"),
-                };
-
-                LoadSource(htmlSource, cssFiles, jsFiles);
+                LoadContent(basePath, contentType);
             }
 
             InitMainFormHandlers();
         }
+
+        private void LoadContent(string basePath, string contentType)
+        {
+            string htmlSource = Path.Combine(basePath, contentType, "index.html");
+
+            List<string> cssFiles = new List<string>
+            {
+                Path.Combine(basePath, $@"{contentType}\css", "animate.min.css"),
+                Path.Combine(basePath, $@"{contentType}\css", "style.css"),
+            };
+
+                    List<string> jsFiles = new List<string>
+            {
+                Path.Combine(basePath, $@"{contentType}\js", "jquery.min.js"),
+                Path.Combine(basePath, $@"{contentType}\js", "textFit.min.js"),
+                Path.Combine(basePath, contentType, "app.js"),
+            };
+
+            LoadSource(htmlSource, cssFiles, jsFiles);
+        }
+
 
         /// <summary>
         /// Initializes event handlers for MainForm interactions.
@@ -280,7 +278,7 @@ namespace Fihirana_database.Forms
                 3 => "center",
                 _ => ""
             };
-            _ = webView.ExecuteScriptAsync($"_Alignment(\"{alignment}\")");
+            _ = webView.CoreWebView2.ExecuteScriptAsync($"_Alignment(\"{alignment}\")");
         }
 
         /// <summary>
@@ -318,7 +316,7 @@ namespace Fihirana_database.Forms
                 {
                     byte[] videoArray = File.ReadAllBytes(videoPath);
                     string base64Video = Convert.ToBase64String(videoArray);
-                    _ = await webView.ExecuteScriptAsync($"_Video(\"data:video/mp4;base64,{base64Video}\")");
+                    _ = await webView.CoreWebView2.ExecuteScriptAsync($"_Video(\"data:video/mp4;base64,{base64Video}\")");
                 }
             }
             catch

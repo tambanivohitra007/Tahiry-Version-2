@@ -1,4 +1,13 @@
+// ------------------------------------------------------------
+// Author: Rindra Razafinjatovo
+// Created on: 2018
+// Last Modified: Dec 2024
+// Project: Tahiry
+// Description: A collection of Bible and Hymnals to streamline and enhance worship presentations for churches.
+// ------------------------------------------------------------
+
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Fihirana_database.Classes
 {
@@ -9,53 +18,20 @@ namespace Fihirana_database.Classes
 
         public static List<Effects> AllEffects()
         {
-            var list = new List<Effects>
+            var effectsData = new[]
             {
-                new Effects()
-                {
-                    Category = "boucing_entrances",
-                    Liste = new string[] { "bounceIn", "bounceInDown", "bounceInLeft", "bounceInRight", "bounceInUp" }
-                },
-                new Effects()
-                {
-                    Category = "fading_entrances",
-                    Liste = new string[] { "fadeIn", "fadeInDown", "fadeInDownBig", "fadeInLeft", "fadeInLeftBig", "fadeInRight", "fadeInRightBig", "fadeInUp", "fadeInUpBig", "fadeInTopLeft", "fadeInTopRight", "fadeInBottomLeft", "fadeInBottomRight" }
-                },
-                new Effects()
-                {
-                    Category = "back_entrances",
-                    Liste = new string[] { "backInDown", "backInLeft", "backInRight", "backInUp" }
-                },
-                new Effects()
-                {
-                    Category = "rotating_entrances",
-                    Liste = new string[] { "rotateIn", "rotateInDownLeft", "rotateInDownRight", "rotateInUpLeft",
-                     "rotateInUpRight"}
-                },
-                new Effects()
-                {
-                    Category = "lightSpeed",
-                    Liste = new string[] { "lightSpeedInRight", "lightSpeedInLeft" }
-                },
-                new Effects()
-                {
-                    Category = "specials",
-                    Liste = new string[] {"bounce", "flash", "pusle", "rubberBand", "shakeX", "shakeY",
-                       "headShake", "swing", "tada", "wobble", "jello", "heartBeat", "jackInTheBox", "rollIn"}
-                },
-                new Effects()
-                {
-                    Category = "zooming_entrances",
-                    Liste = new string[] { "zoomIn", "zoomInDown", "zoomInLeft", "zoomInRight", "zoomInUp" }
-                },
-                new Effects()
-                {
-                    Category = "sliding_entrances",
-                    Liste = new string[] { "slideInDown", "slideInLeft", "slideInRight", "slideInUp" }
-                }
+                new { Category = "boucing_entrances", Liste = new[] { "bounceIn", "bounceInDown", "bounceInLeft", "bounceInRight", "bounceInUp" } },
+                new { Category = "fading_entrances", Liste = new[] { "fadeIn", "fadeInDown", "fadeInDownBig", "fadeInLeft", "fadeInLeftBig", "fadeInRight", "fadeInRightBig", "fadeInUp", "fadeInUpBig", "fadeInTopLeft", "fadeInTopRight", "fadeInBottomLeft", "fadeInBottomRight" } },
+                new { Category = "back_entrances", Liste = new[] { "backInDown", "backInLeft", "backInRight", "backInUp" } },
+                new { Category = "rotating_entrances", Liste = new[] { "rotateIn", "rotateInDownLeft", "rotateInDownRight", "rotateInUpLeft", "rotateInUpRight" } },
+                new { Category = "lightSpeed", Liste = new[] { "lightSpeedInRight", "lightSpeedInLeft" } },
+                new { Category = "specials", Liste = new[] { "bounce", "flash", "pusle", "rubberBand", "shakeX", "shakeY", "headShake", "swing", "tada", "wobble", "jello", "heartBeat", "jackInTheBox", "rollIn" } },
+                new { Category = "zooming_entrances", Liste = new[] { "zoomIn", "zoomInDown", "zoomInLeft", "zoomInRight", "zoomInUp" } },
+                new { Category = "sliding_entrances", Liste = new[] { "slideInDown", "slideInLeft", "slideInRight", "slideInUp" } }
             };
 
-            return list;
+            return effectsData.Select(e => new Effects { Category = e.Category, Liste = e.Liste }).ToList();
         }
+
     }
 }
