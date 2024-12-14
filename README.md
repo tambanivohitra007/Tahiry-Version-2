@@ -43,10 +43,11 @@ These Bible versions are integrated into Tahiry:
 
 ## Technology Stack
 
-- **Programming Language**: C#  
+- **Programming Language**: C#, Javascript (for animations)
 - **Framework**: .NET 8  
-- **UI Framework**: DevExpress WinForms  
+- **UI Framework**: DevExpress WinForms 23.2.10
 - **Database**: SQLite (automatically configured)
+- WebView 2
 
 ---
 
