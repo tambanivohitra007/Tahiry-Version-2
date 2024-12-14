@@ -71,21 +71,6 @@ namespace Fihirana_database.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to @charset &quot;UTF-8&quot;;/*!
-        /// * animate.css - https://animate.style/
-        /// * Version - 4.1.1
-        /// * Licensed under the MIT license - http://opensource.org/licenses/MIT
-        /// *
-        /// * Copyright (c) 2020 Animate.css
-        /// */:root{--animate-duration:1s;--animate-delay:1s;--animate-repeat:1}.animate__animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-duration:var(--animate-duration);animation-duration:var(--animate-duration);-webkit-animation-fill-mode:both;animation-fill-mode:both}.animate__animated.animate__infi [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string animate_min_css {
-            get {
-                return ResourceManager.GetString("animate_min_css", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage black_screen_2205227 {
@@ -226,66 +211,6 @@ namespace Fihirana_database.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html lang=&quot;en&quot;&gt;
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;   
-        ///    &lt;title&gt;Projection Fihirana&lt;/title&gt;
-        ///    &lt;style&gt;
-        ///        .grid {
-        ///            -webkit-transition: all 0.5s ease;
-        ///            -moz-transition: all 0.5s ease;
-        ///            -o-transition: all 0.5s ease;
-        ///            transition: all 0.5s ease;
-        ///        }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;div id=&quot;pa [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string index {
-            get {
-                return ResourceManager.GetString("index", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
-        ///&lt;html lang=&quot;en&quot;&gt;
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-        ///    &lt;title&gt;Verset biblique&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;blockquote class=&quot;quote grid animate__animated&quot; id=&quot;parent&quot;&gt;
-        ///        &lt;p class=&quot;bible&quot;&gt;&lt;/p&gt;
-        ///        &lt;cite class=&quot;verse&quot;&gt;&lt;/cite&gt;
-        ///    &lt;/blockquote&gt;
-        ///&lt;/body&gt;
-        ///
-        ///&lt;/html&gt;.
-        /// </summary>
-        internal static string index_bible_html {
-            get {
-                return ResourceManager.GetString("index_bible_html", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /*! jQuery v1.11.1 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
-        ///!function(a,b){&quot;object&quot;==typeof module&amp;&amp;&quot;object&quot;==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error(&quot;jQuery requires a window with a document&quot;);return b(a)}:b(a)}(&quot;undefined&quot;!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l=&quot;1.11.1&quot;,m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string jquery_min_js {
-            get {
-                return ResourceManager.GetString("jquery_min_js", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage logo_propre_381399 {
@@ -342,82 +267,6 @@ namespace Fihirana_database.Properties {
             get {
                 object obj = ResourceManager.GetObject("projection-svgrepo-com", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /*RINDRA RAZAFINJATOVO*/
-        ///html {
-        ///    font-size: clamp(60px, 6vw, 120px);
-        ///}
-        ///
-        ///body {
-        ///    overflow: hidden;
-        ///}
-        ///
-        ///.grid {
-        ///    position: relative;    
-        ///    width: 100%;
-        ///    height: 90vh;
-        ///    display: flex;
-        ///    align-items: center;
-        ///    justify-content: center;
-        ///    text-shadow: 2px 3px 5px rgba(0,0,0,0.5), 
-        ///        0px 8px 13px rgba(0,0,0,0.1), 
-        ///        0px 18px 23px rgba(0,0,0,0.1);    
-        ///    line-height: 1;
-        ///    top: 10px;
-        ///}
-        ///
-        ///.lyrics {
-        ///    color: white;
-        ///    animation-duration: 1s;
-        ///}
-        ///
-        ///#parent [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string style {
-            get {
-                return ResourceManager.GetString("style", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to body::before {
-        ///    content: &quot;Bible&quot;;
-        ///    font-size: 130vh;
-        ///    color: rgba(0, 0, 0, 0.1);
-        ///    position: absolute;
-        ///    top: -35vh;
-        /// }
-        ///
-        ///body {
-        ///    height: 100vh;
-        ///    overflow: hidden;
-        ///    background-image: radial-gradient( farthest-corner at 40px 40px, rgba(33, 29, 28, 0.7) 0%, rgb(77, 77, 77) 100% );
-        ///    /*background-image: url(&quot;bg.jpeg&quot;);*/
-        ///    display: flex;
-        ///    align-items: center;
-        ///    justify-content: center;
-        ///    object-fit: contain;
-        ///}
-        ///
-        ///blockquote {
-        ///    color: white;
-        ///    font-family: [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string style_bible_css {
-            get {
-                return ResourceManager.GetString("style_bible_css", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (function(root,factory){&quot;use strict&quot;;if(typeof define===&quot;function&quot;&amp;&amp;define.amd){define([],factory)}else if(typeof exports===&quot;object&quot;){module.exports=factory()}else{root.textFit=factory()}})(typeof global===&quot;object&quot;?global:this,function(){&quot;use strict&quot;;var defaultSettings={alignVert:false,alignHoriz:false,multiLine:false,detectMultiLine:true,minFontSize:6,maxFontSize:80,reProcess:true,widthOnly:false,alignVertWithFlexbox:false};return function textFit(els,options){if(!options)options={};var settings={};for(va [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string textFit_min_js {
-            get {
-                return ResourceManager.GetString("textFit_min_js", resourceCulture);
             }
         }
     }

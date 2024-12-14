@@ -143,73 +143,32 @@ namespace Fihirana_database
                 listBibleAll2.SelectedIndex = 0;
                 selectBibleRefresh(0);
 
-                //populate items for effects
+                // Map categories to their corresponding controls
+                var effectControls = new Dictionary<string, dynamic>
+                {
+                    { "boucing_entrances", iBounce },
+                    { "fading_entrances", iFading },
+                    { "back_entrances", iBack },
+                    { "rotating_entrances", iRotate },
+                    { "lightSpeed", iLight },
+                    { "specials", iSpecial },
+                    { "zooming_entrances", iZoom },
+                    { "sliding_entrances", iSlide }
+                };
+
+                // Populate items for effects
                 foreach (Effects item in Effects.AllEffects())
                 {
-                    switch (item.Category)
+                    if (effectControls.TryGetValue(item.Category, out var control))
                     {
-                        case "boucing_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iBounce.Strings.Add(eff);
-
-                            }
-                            iBounce.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "fading_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iFading.Strings.Add(eff);
-                            }
-                            iFading.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "back_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iBack.Strings.Add(eff);
-                            }
-                            iBack.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "rotating_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iRotate.Strings.Add(eff);
-                            }
-                            iRotate.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "lightSpeed":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iLight.Strings.Add(eff);
-                            }
-                            iLight.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "specials":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iSpecial.Strings.Add(eff);
-                            }
-                            iSpecial.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "zooming_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iZoom.Strings.Add(eff);
-                            }
-                            iZoom.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        case "sliding_entrances":
-                            foreach (string eff in item.Liste)
-                            {
-                                _ = iSlide.Strings.Add(eff);
-                            }
-                            iSlide.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
-                            break;
-                        default:
-                            break;
+                        foreach (string eff in item.Liste)
+                        {
+                            _ = control.Strings.Add(eff);
+                        }
+                        control.ListItemClick += new ListItemClickEventHandler(iListEffect_ItemClick);
                     }
-
                 }
+
                 //Load effect from database
                 string effectName = sett.Where(s => s.ID == 1).SingleOrDefault().Value;
                 SetCheck(effectName);
@@ -728,118 +687,64 @@ namespace Fihirana_database
             catch { }
         }
 
-        private void handleRichEdit(RichEditControl richEdit, GridView dgv)
+        private void HandleRichEdit(RichEditControl richEdit, GridView dgv)
         {
             try
             {
-                //The target range is the first paragraph
-                DocumentRange range;
-
-                getParoles = [];
+                getParoles = new List<Chant>();
 
                 string titre = dgv.GetRowCellValue(dgv.FocusedRowHandle, dgv.Columns["Title"]).ToString();
                 string number = "\nN° " + dgv.GetRowCellValue(dgv.FocusedRowHandle, dgv.Columns["Number"]).ToString();
+                string agendaType = isAgenda ? dgvAgenda.GetRowCellValue(dgvAgenda.FocusedRowHandle, dgvAgenda.Columns[0]).ToString() : string.Empty;
 
                 if (!checkClicked)
                 {
-                    if (!isAgenda)
+                    if (!isAgenda || agendaType == "FF")
                     {
-                        getParoles.Add(new Chant() { Parole = titre + number });
-                    }
-                    else
-                    {
-                        if (dgvAgenda.GetRowCellValue(dgvAgenda.FocusedRowHandle, dgvAgenda.Columns[0]).ToString() == "FF")
-                        {
-                            getParoles.Add(new Chant() { Parole = titre + number });
-                        }
+                        getParoles.Add(new Chant { Parole = titre + number });
                     }
                 }
-
 
                 Document document = richEdit.Document;
                 document.BeginUpdate();
-                range = document.Paragraphs[1].Range;
 
-                ParagraphCollection pp = document.Paragraphs;
+                string getText = string.Empty;
+                ParagraphCollection paragraphs = document.Paragraphs;
 
-                int start = range.Start.ToInt();
-
-                string getText = "";
-                List<string> splitStr = [];
-                var lastFound = pp.Last();
-                DocumentRange range_ = null;
-                //ISearchResult searchResult = document.StartSearch( "\\par", SearchOptions.CaseSensitive, SearchDirection.Forward, richEdit.Document.Range );
-
-                if (!isAgenda)
+                if (!isAgenda || agendaType == "FF")
                 {
-                    foreach (var item in pp)
+                    foreach (var paragraph in paragraphs)
                     {
-                        if (item.Range.Length > 1)
+                        if (paragraph.Range.Length > 1)
                         {
-                            start = item.Range.Start.ToInt();
-                            range_ = richEdit.Document.CreateRange(start, item.Range.Length);
-                            getText += richEdit.Document.GetText(range_) + "\n";
+                            var range = richEdit.Document.CreateRange(paragraph.Range.Start.ToInt(), paragraph.Range.Length);
+                            getText += richEdit.Document.GetText(range) + "\n";
                         }
-                        else
+                        else if (!string.IsNullOrEmpty(getText))
                         {
-                            //getText += "~";
-                            if (!string.IsNullOrEmpty(getText))
-                            {
-                                getParoles.Add(new Chant() { Parole = getText });
-                                getText = string.Empty;
-                            }
-
+                            getParoles.Add(new Chant { Parole = getText.TrimEnd('\n') });
+                            getText = string.Empty;
                         }
-
-                        //string s = richEdit.Document.GetText(range_);
                     }
 
-                    //string[] splitS = getText.Split( '~' );
-                    //foreach (string item in splitS)
-                    //{
-                    //    if (!string.IsNullOrEmpty( item )) getParoles.Add( new Chant() { Parole = item } );
-                    //}
+                    if (!string.IsNullOrEmpty(getText)) // Add any remaining text
+                    {
+                        getParoles.Add(new Chant { Parole = getText.TrimEnd('\n') });
+                    }
                 }
                 else
                 {
-                    if (dgvAgenda.GetRowCellValue(dgvAgenda.FocusedRowHandle, dgvAgenda.Columns[0]).ToString() == "FF")
-                    {
-                        foreach (var item in pp)
-                        {
-                            if (item.Range.Length > 1)
-                            {
-                                start = item.Range.Start.ToInt();
-                                range_ = richEdit.Document.CreateRange(start, item.Range.Length);
-                                getText += richEdit.Document.GetText(range_) + "\n";
-                            }
-                            else
-                            {
-                                //getText += "~";
-                                getParoles.Add(new Chant() { Parole = getText });
-                                getText = string.Empty;
-                            }
-                        }
-
-                        //string[] splitS = getText.Split( '~' );
-                        //foreach (string item in splitS)
-                        //{
-                        //    if (!string.IsNullOrEmpty( item )) getParoles.Add( new Chant() { Parole = item } );
-                        //}
-                    }
-                    else
-                    {
-                        getParoles.Add(new Chant() { Parole = dgv.GetRowCellValue(dgv.FocusedRowHandle, dgv.Columns["Parole"]).ToString() });
-                    }
+                    string parole = dgv.GetRowCellValue(dgv.FocusedRowHandle, dgv.Columns["Parole"]).ToString();
+                    getParoles.Add(new Chant { Parole = parole });
                 }
 
                 document.EndUpdate();
             }
             catch
             {
-                _ = XtraMessageBox.Show("Pas de paroles ni versets à présenter. ", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                XtraMessageBox.Show("Pas de paroles ni versets à présenter.", "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
-
 
 
         private void iDelete_ItemClick(object sender, ItemClickEventArgs e)
@@ -1157,7 +1062,7 @@ namespace Fihirana_database
                                 break;
                         }
 
-                        separateDigitString(txtSearchR.Text, field);
+                        SeparateDigitString(txtSearchR.Text, field);
                     }
                     catch { }
                 }
@@ -1238,58 +1143,80 @@ namespace Fihirana_database
             try
             {
                 Rectangle rect = new Rectangle(0, 0, screenShot.Width, screenShot.Height);
+                int fontSize = 50;
 
-                //base.OnPaint(e);
-
-                int fontsize = 50;
-
-                if (gridV.FocusedRowHandle >= 0)
-                    Mon_message = gridV.GetRowCellValue(gridV.FocusedRowHandle, gridV.Columns[0]).ToString();
-                else Mon_message = "";
-
-                averina:
-
-                Font font1 = new Font("Tahoma", fontsize, FontStyle.Bold, GraphicsUnit.Point);
-                Size textSize = TextRenderer.MeasureText(Mon_message, font1);
-                SizeF sf = e.Graphics.MeasureString(Mon_message, font1, screenShot.Height);
+                Mon_message = gridV.FocusedRowHandle >= 0
+                    ? gridV.GetRowCellValue(gridV.FocusedRowHandle, gridV.Columns[0]).ToString()
+                    : "";
 
                 StringFormat drawFormat = new StringFormat();
-
-                StringAlignment aln;
-
-                if (iGoNear.Down) { aln = StringAlignment.Near; saveSettings("1", 2); }
-                else if (iGoFar.Down) { aln = StringAlignment.Far; saveSettings("2", 2); }
-                else { aln = StringAlignment.Center; saveSettings("3", 2); }
+                SetTextAlignment(drawFormat);
 
                 if (LogClass.isTextVerse)
                 {
+                    AdjustFontSizeForHeight(e.Graphics, Mon_message, ref fontSize, screenShot.Height, rect, drawFormat);
                     rect = new Rectangle(5, 10, screenShot.Width - 10, screenShot.Height);
-                    drawFormat.Alignment = aln;
-
-                    if (sf.Height > rect.Height)
-                    {
-                        fontsize -= 1;
-                        goto averina;
-                    }
-                    e.Graphics.DrawString(Mon_message, font1, Brushes.White, rect, drawFormat);
+                    e.Graphics.DrawString(Mon_message, new Font("Tahoma", fontSize, FontStyle.Bold, GraphicsUnit.Point), Brushes.White, rect, drawFormat);
                 }
                 else
                 {
+                    AdjustFontSizeForBounds(e.Graphics, Mon_message, ref fontSize, screenShot.Width, screenShot.Height);
                     rect = new Rectangle(5, 0, screenShot.Width - 10, screenShot.Height);
-                    drawFormat.Alignment = aln;
-
-                    if (textSize.Height > rect.Height || textSize.Width > rect.Width)
-                    {
-                        fontsize -= 1;
-                        goto averina;
-                    }
-
                     TextFormatFlags flags = TextFormatFlags.HorizontalCenter | TextFormatFlags.EndEllipsis | TextFormatFlags.VerticalCenter;
-                    TextRenderer.DrawText(e.Graphics, Mon_message, font1, rect, Color.White, flags);
+                    TextRenderer.DrawText(e.Graphics, Mon_message, new Font("Tahoma", fontSize, FontStyle.Bold, GraphicsUnit.Point), rect, Color.White, flags);
                 }
-
             }
-            catch { }
+            catch
+            {
+                // Consider logging the exception for debugging purposes
+            }
+        }
+
+        private void SetTextAlignment(StringFormat drawFormat)
+        {
+            if (iGoNear.Down)
+            {
+                drawFormat.Alignment = StringAlignment.Near;
+                saveSettings("1", 2);
+            }
+            else if (iGoFar.Down)
+            {
+                drawFormat.Alignment = StringAlignment.Far;
+                saveSettings("2", 2);
+            }
+            else
+            {
+                drawFormat.Alignment = StringAlignment.Center;
+                saveSettings("3", 2);
+            }
+        }
+
+        private void AdjustFontSizeForHeight(Graphics graphics, string text, ref int fontSize, int maxHeight, Rectangle rect, StringFormat format)
+        {
+            while (true)
+            {
+                Font font = new Font("Tahoma", fontSize, FontStyle.Bold, GraphicsUnit.Point);
+                SizeF measuredSize = graphics.MeasureString(text, font, rect.Height);
+
+                if (measuredSize.Height <= maxHeight)
+                    break;
+
+                fontSize--;
+            }
+        }
+
+        private void AdjustFontSizeForBounds(Graphics graphics, string text, ref int fontSize, int maxWidth, int maxHeight)
+        {
+            while (true)
+            {
+                Font font = new Font("Tahoma", fontSize, FontStyle.Bold, GraphicsUnit.Point);
+                SizeF measuredSize = graphics.MeasureString(text, font);
+
+                if (measuredSize.Width <= maxWidth && measuredSize.Height <= maxHeight)
+                    break;
+
+                fontSize--;
+            }
         }
 
         private void tabPane_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
@@ -1321,32 +1248,30 @@ namespace Fihirana_database
         {
             txtSearchR.Text = "";
             selectBible = listBible.SelectedIndex;
-            switch (listBible.SelectedIndex)
+
+            // Map selected index ranges to column visibility and autocomplete parameters
+            var bibleSettings = new Dictionary<int[], (bool longName, bool longNameFrench, bool longNameEnglish, int autoCompleteIndex)>
             {
-                case 0:
-                case 1:
-                    dgvBook.Columns["long_name"].Visible = true;
-                    dgvBook.Columns["long_name_french"].Visible = false;
-                    dgvBook.Columns["long_name_english"].Visible = false;
-                    livreAutoComplete(txtSearchR, 0);
+                { new[] { 0, 1 }, (true, false, false, 0) },
+                { new[] { 2, 3 }, (false, true, false, 1) },
+                { new[] { 4, 5 }, (false, false, true, 2) }
+            };
+
+            foreach (var (key, value) in bibleSettings)
+            {
+                if (key.Contains(listBible.SelectedIndex))
+                {
+                    dgvBook.Columns["long_name"].Visible = value.longName;
+                    dgvBook.Columns["long_name_french"].Visible = value.longNameFrench;
+                    dgvBook.Columns["long_name_english"].Visible = value.longNameEnglish;
+                    livreAutoComplete(txtSearchR, value.autoCompleteIndex);
                     break;
-                case 2:
-                case 3:
-                    dgvBook.Columns["long_name"].Visible = false;
-                    dgvBook.Columns["long_name_french"].Visible = true;
-                    dgvBook.Columns["long_name_english"].Visible = false;
-                    livreAutoComplete(txtSearchR, 1);
-                    break;
-                case 4:
-                case 5:
-                    dgvBook.Columns["long_name"].Visible = false;
-                    dgvBook.Columns["long_name_french"].Visible = false;
-                    dgvBook.Columns["long_name_english"].Visible = true;
-                    livreAutoComplete(txtSearchR, 2);
-                    break;
+                }
             }
+
             GetTextVerses(selectBible);
         }
+
 
         private void listVerse_DoubleClick(object sender, EventArgs e)
         {
@@ -1683,87 +1608,34 @@ namespace Fihirana_database
         private async void Search(string searchText)
         {
             object query = null;
+            var searchTextLower = searchText.ToLower();
+
+            // Map SelectedIndex to data sources and book properties
+            var bibleSources = new Dictionary<int, (IEnumerable<dynamic> source, Func<dynamic, string> bookProperty)>
+            {
+                { 0, (mlg, m => m.long_name) },
+                { 1, (diem, m => m.long_name) },
+                { 2, (lsg, m => m.long_name_french) },
+                { 3, (bds, m => m.long_name_french) },
+                { 4, (niv, m => m.long_name_english) },
+                { 5, (kjv, m => m.long_name_english) }
+            };
+
             await Task.Run(() =>
             {
-                switch (listBibleAll2.SelectedIndex)
+                if (bibleSources.TryGetValue(listBibleAll2.SelectedIndex, out var data))
                 {
-                    case 0:
-                        query = from s in mlg
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    case 1:
-                        query = from s in diem
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    case 2:
-                        query = from s in lsg
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name_french,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    case 3:
-                        query = from s in bds
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name_french,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    case 4:
-                        query = from s in niv
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name_english,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    case 5:
-                        query = from s in kjv
-                                join m in book on s.book_number equals m.book_number
-                                where s.text.ToLower().Contains(searchText.ToLower())
-                                select new
-                                {
-                                    text = StripHTML(s.text),
-                                    book = m.long_name_english,
-                                    chapter = s.chapter,
-                                    verse = s.verse
-                                };
-                        break;
-                    default:
-                        break;
+                    query = from s in data.source
+                            join m in book on s.book_number equals m.book_number
+                            where s.text.ToLower().Contains(searchTextLower)
+                            select new
+                            {
+                                text = StripHTML(s.text),
+                                book = data.bookProperty(m),
+                                chapter = s.chapter,
+                                verse = s.verse
+                            };
                 }
-
-
             });
 
             gridControlBible.DataSource = null;
@@ -1866,16 +1738,17 @@ namespace Fihirana_database
         {
             GridView view = gridV;
 
-            if (e.KeyCode == Keys.Down
-                || e.KeyCode == Keys.PageDown
-                || e.KeyCode == Keys.Right
-                || e.KeyCode == Keys.Enter)
+            // Keys that move the selection forward
+            var forwardKeys = new[] { Keys.Down, Keys.PageDown, Keys.Right, Keys.Enter };
+            // Keys that move the selection backward
+            var backwardKeys = new[] { Keys.Up, Keys.PageUp, Keys.Left };
+
+            if (forwardKeys.Contains(e.KeyCode))
             {
                 if (!view.IsLastRow)
                 {
                     view.MoveNext();
                     e.Handled = true;
-
                     showContentGrid(sender, null);
                 }
                 else
@@ -1883,14 +1756,9 @@ namespace Fihirana_database
                     LogClass.isBlackScreen = true;
                     BlackScreen?.Invoke(sender, e);
                 }
-
             }
-
-            else if (e.KeyCode == Keys.Up
-                || e.KeyCode == Keys.PageUp
-                || e.KeyCode == Keys.Left)
+            else if (backwardKeys.Contains(e.KeyCode))
             {
-
                 if (!view.IsFirstRow)
                 {
                     if (LogClass.isBlackScreen)
@@ -1902,7 +1770,6 @@ namespace Fihirana_database
                     {
                         view.MovePrev();
                         e.Handled = true;
-
                         showContentGrid(sender, null);
                     }
                 }
@@ -1912,12 +1779,6 @@ namespace Fihirana_database
                 iBlackScreen.Down = false;
             }
         }
-
-        //private void readyBtn_Click(object sender, EventArgs e)
-        //{           
-        //    handleRichEdit(richEdit, customGridView);
-        //    dataSourceUpdate();
-        //}
 
         private void dataSourceBible(GridControl gC, GridView grid)
         {
@@ -1961,7 +1822,7 @@ namespace Fihirana_database
 
         private void readyBtn2_Click(object sender, EventArgs e)
         {
-            handleRichEdit(richEditParole, dgvAgenda);
+            HandleRichEdit(richEditParole, dgvAgenda);
             dataSourceUpdate(getParoles);
         }
 
@@ -2018,58 +1879,58 @@ namespace Fihirana_database
             gridParole.DataSource = lstBible;
         }
 
-        private void separateDigitString(string input, string field_name)
-        {
-            string[] numbers = Regex.Split(input, @"\D+");
-            string[] livre = Regex.Split(input, @"\d+");
-
-            foreach (string value in livre)
+            private void SeparateDigitString(string input, string field_name)
             {
-                if (value.Length > 3)
+                string[] numbers = Regex.Split(input, @"\D+");
+                string[] livre = Regex.Split(input, @"\d+");
+
+                foreach (string value in livre)
                 {
-                    string boky = input.IndexOf(numbers[0]) == 0 ? $"{numbers[0]} {value.Trim()}" : value.Trim();
-
-                    for (int i = 0; i < dgvBook.DataRowCount; i++)
+                    if (value.Length > 3)
                     {
-                        string dataInCell = Convert.ToString(dgvBook.GetRowCellValue(i, field_name));
-                        if (dataInCell.Trim().ToLower().Contains(boky.Trim().ToLower()))
+                        string boky = input.IndexOf(numbers[0]) == 0 ? $"{numbers[0]} {value.Trim()}" : value.Trim();
+
+                        for (int i = 0; i < dgvBook.DataRowCount; i++)
                         {
-                            dgvBook.FocusedRowHandle = i;
-                            break;
+                            string dataInCell = Convert.ToString(dgvBook.GetRowCellValue(i, field_name));
+                            if (dataInCell.Trim().ToLower().Contains(boky.Trim().ToLower()))
+                            {
+                                dgvBook.FocusedRowHandle = i;
+                                break;
+                            }
                         }
-                    }
 
-                    int count = 0;
-                    int verse = 0;
-                    foreach (string item in numbers)
-                    {
-                        if (input.IndexOf(item) > 0)
+                        int count = 0;
+                        int verse = 0;
+                        foreach (string item in numbers)
                         {
-                            if (count == 0)
+                            if (input.IndexOf(item) > 0)
                             {
-                                listChapter.SelectedIndex = int.Parse(item) - 1;
-                                count++;
-                            }
-                            else if (count == 1)
-                            {
-                                verse = int.Parse(item);
-                                listVerse.SelectedIndex = int.Parse(item) - 1;
-                                count++;
-                            }
-                            else
-                            {
-                                listVerse.SelectedIndex = -1;
-
-                                for (int i = verse; i <= int.Parse(item); i++)
+                                if (count == 0)
                                 {
-                                    listVerse.SetSelected(i - 1, true);
+                                    listChapter.SelectedIndex = int.Parse(item) - 1;
+                                    count++;
+                                }
+                                else if (count == 1)
+                                {
+                                    verse = int.Parse(item);
+                                    listVerse.SelectedIndex = int.Parse(item) - 1;
+                                    count++;
+                                }
+                                else
+                                {
+                                    listVerse.SelectedIndex = -1;
+
+                                    for (int i = verse; i <= int.Parse(item); i++)
+                                    {
+                                        listVerse.SetSelected(i - 1, true);
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
 
         private void iShowSidebar_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -2115,8 +1976,7 @@ namespace Fihirana_database
 
             if (xOpen.ShowDialog() == DialogResult.OK)
             {
-                string getFileName = $"{xOpen.FileName}";
-                //getFileName = getFileName.Replace("\\", "/");
+                string getFileName = $"{xOpen.FileName}";                
                 DisplayForm.ImagePath = $"{getFileName}";
                 saveSettings(getFileName, 6);
                 ChangeImageBackground?.Invoke(sender, e);
@@ -2137,8 +1997,7 @@ namespace Fihirana_database
 
             if (xOpen.ShowDialog() == DialogResult.OK)
             {
-                string getFileName = $"{xOpen.FileName}";
-                //getFileName = getFileName.Replace("\\", "/");
+                string getFileName = $"{xOpen.FileName}";                
                 DisplayForm.VideoPath = $"{getFileName}";
                 saveSettings(getFileName, 7);
 
@@ -2150,5 +2009,7 @@ namespace Fihirana_database
             UserLookAndFeel.Default.SetSkinStyle(ClassSettings.SwitchMode(true));
             changeColorSkin?.Invoke(null, null);
         }
+
+        private void iUpdate_ItemClick(object sender, ItemClickEventArgs e) => AutoUpdater.CheckForUpdates();
     }
 }

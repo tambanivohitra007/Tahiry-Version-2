@@ -9,9 +9,6 @@ namespace Fihirana_database
         {
             InitializeComponent();
         }
-
-
-
         #region Overrides
 
         public override void ProcessCommand(Enum cmd, object arg)
@@ -20,9 +17,5 @@ namespace Fihirana_database
         }
 
         #endregion Overrides
-
-        public enum SplashScreenCommand
-        {
-        }
     }
 }

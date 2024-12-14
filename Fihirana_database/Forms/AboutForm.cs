@@ -7,7 +7,7 @@
             InitializeComponent();
 
             infoLbl.Text = "Ce logiciel n'est plus pris en charge par le propriétaire.<br>" +
-               "Version 2.0.0.3 <size=11><br>" +
+               "Version 2.0.0.6 <size=11><br>" +
                "Pour plus d'informations, veuillez contacter l'adresse e-mail suivante :<br>" +
                "<br><b>E-mail :</b> rindra.it@gmail.com<br>";
 

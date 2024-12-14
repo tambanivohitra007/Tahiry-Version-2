@@ -191,7 +191,6 @@ namespace Fihirana_database.Forms
             }
 
             InitMainFormHandlers();
-            //initSettings();
         }
 
         /// <summary>
