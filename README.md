@@ -11,6 +11,7 @@
 - **Offline Capability**: Fully functional without an internet connection.
 - **DevExpress-Powered UI**: Provides a modern and professional user interface.
 - **Registry-Based Configuration**: Saves settings in the Windows Registry for secure and persistent configuration.
+- **Cross-Reference Songs**: A feature that allows users to relate songs that share the same melody but have different content. This feature is especially useful for identifying songs with a common tune across multiple hymnals or languages
 
 ---
 
