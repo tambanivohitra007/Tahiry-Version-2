@@ -11,6 +11,7 @@
 - **Offline Capability**: Fully functional without an internet connection.
 - **DevExpress-Powered UI**: Provides a modern and professional user interface.
 - **Registry-Based Configuration**: Saves settings in the Windows Registry for secure and persistent configuration.
+- **Cross-Reference Songs**: A feature that allows users to relate songs that share the same melody but have different content. This feature is especially useful for identifying songs with a common tune across multiple hymnals or languages
 
 ---
 
@@ -43,10 +44,11 @@ These Bible versions are integrated into Tahiry:
 
 ## Technology Stack
 
-- **Programming Language**: C#  
+- **Programming Language**: C#, Javascript (for animations)
 - **Framework**: .NET 8  
-- **UI Framework**: DevExpress WinForms  
+- **UI Framework**: DevExpress WinForms 23.2.10
 - **Database**: SQLite (automatically configured)
+- WebView 2
 
 ---
 
@@ -83,3 +85,77 @@ Tahiry uses the Windows Registry to securely save application settings:
 using RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\\RindraSoftware\\Tahiry");
 registryKey?.SetValue("Provider", "SQLite");
 registryKey?.SetValue("DataSource", $"{SpecialFolderPath}\\Rindrasoftware\\Tahiry\\tahiry.db");
+```
+---
+
+## Installing DevExpress
+
+To use **Tahiry**, you need to install **DevExpress** (WinForms components). Follow these steps:
+
+### Step 1: Install DevExpress
+1. **Download DevExpress**:
+   - Visit the [DevExpress website](https://www.devexpress.com/) and log in to your account. If you don't have an account, create one.
+   - Navigate to the **Download Manager** section and download the latest version of DevExpress WinForms.
+
+2. **Install DevExpress**:
+   - Run the installer and follow the instructions to complete the installation.
+
+3. **Activate DevExpress**:
+   - During the installation, you will be prompted to activate your license using your DevExpress credentials.
+
+---
+
+### Step 2: Add DevExpress to Your Project
+1. **Configure Your Project**:
+   - Open your **Tahiry** project in Visual Studio.
+   - Go to `Tools > NuGet Package Manager > Manage NuGet Packages for Solution`.
+
+2. **Install DevExpress NuGet Packages**:
+   - Search for the following packages and install them:
+     - `DevExpress.WinForms`
+     - `DevExpress.Data`
+     - `DevExpress.Utils`
+
+   These packages include the necessary libraries for the application.
+
+3. **Update References**:
+   - Ensure that the DevExpress libraries are correctly referenced in your project:
+     - In the `Solution Explorer`, right-click your project and select **Add Reference**.
+     - Browse to the DevExpress installation directory (default: `C:\Program Files (x86)\DevExpress 23.x\Components\Bin\Framework`) and add the required DLLs, such as:
+       - `DevExpress.XtraEditors.dll`
+       - `DevExpress.XtraBars.dll`
+       - `DevExpress.XtraGrid.dll`
+
+---
+
+### Step 3: Verify Installation
+1. **Build the Project**:
+   - Rebuild your solution in Visual Studio by pressing `Ctrl+Shift+B`.
+   - Ensure that there are no errors related to missing DevExpress libraries.
+
+2. **Test the Application**:
+   - Run the application to verify that all DevExpress components are working correctly.
+
+---
+
+### Additional Notes
+- **DevExpress License**:
+  - Ensure that you have an active DevExpress license. DevExpress components require proper licensing for production use.
+- **Trial Version**:
+  - If you're using a trial version, there may be limitations or watermarks on the components.
+
+
+# License
+
+## MIT License
+
+Copyright (c) 2018-2024 
+Licensed under CC BY-NC 4.0 
+**Rindra Razafinjatovo**
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.**
+
