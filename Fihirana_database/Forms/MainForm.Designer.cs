@@ -495,11 +495,11 @@ namespace Fihirana_database
             gridColumn12.Caption = "Parole";
             gridColumn12.ColumnEdit = repositoryItemMemoEdit1;
             gridColumn12.FieldName = "Parole";
-            gridColumn12.MinWidth = 218;
+            gridColumn12.MinWidth = 191;
             gridColumn12.Name = "gridColumn12";
             gridColumn12.Visible = true;
             gridColumn12.VisibleIndex = 0;
-            gridColumn12.Width = 801;
+            gridColumn12.Width = 701;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -640,7 +640,7 @@ namespace Fihirana_database
             ribbonCtrl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
             ribbonCtrl.ShowQatLocationSelector = false;
             ribbonCtrl.ShowToolbarCustomizeItem = false;
-            ribbonCtrl.Size = new System.Drawing.Size(1653, 175);
+            ribbonCtrl.Size = new System.Drawing.Size(1657, 175);
             ribbonCtrl.StatusBar = ribbonStatusBar1;
             ribbonCtrl.Toolbar.ShowCustomizeItem = false;
             // 
@@ -1497,27 +1497,27 @@ namespace Fihirana_database
             ribbonStatusBar1.ItemLinks.Add(barCount);
             ribbonStatusBar1.ItemLinks.Add(date);
             ribbonStatusBar1.ItemLinks.Add(barSelectProjector, true);
-            ribbonStatusBar1.Location = new System.Drawing.Point(0, 873);
+            ribbonStatusBar1.Location = new System.Drawing.Point(0, 875);
             ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             ribbonStatusBar1.Name = "ribbonStatusBar1";
             ribbonStatusBar1.Ribbon = ribbonCtrl;
-            ribbonStatusBar1.Size = new System.Drawing.Size(1653, 32);
+            ribbonStatusBar1.Size = new System.Drawing.Size(1657, 32);
             // 
             // navigationProject
             // 
             navigationProject.Controls.Add(navigationPage2);
             navigationProject.Dock = System.Windows.Forms.DockStyle.Right;
-            navigationProject.Location = new System.Drawing.Point(1126, 175);
+            navigationProject.Location = new System.Drawing.Point(1130, 175);
             navigationProject.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             navigationProject.Name = "navigationProject";
             navigationProject.PageProperties.ShowCollapseButton = false;
             navigationProject.PageProperties.ShowExpandButton = false;
             navigationProject.PageProperties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.Image;
             navigationProject.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { navigationPage2 });
-            navigationProject.RegularSize = new System.Drawing.Size(527, 698);
+            navigationProject.RegularSize = new System.Drawing.Size(527, 700);
             navigationProject.RibbonAndBarsMergeStyle = DevExpress.XtraBars.Docking2010.Views.RibbonAndBarsMergeStyle.Always;
             navigationProject.SelectedPage = navigationPage2;
-            navigationProject.Size = new System.Drawing.Size(527, 698);
+            navigationProject.Size = new System.Drawing.Size(527, 700);
             navigationProject.TabIndex = 3;
             navigationProject.Text = "Projection";
             navigationProject.TransitionType = DevExpress.Utils.Animation.Transitions.Fade;
@@ -1531,7 +1531,7 @@ namespace Fihirana_database
             navigationPage2.ImageOptions.SvgImageSize = new System.Drawing.Size(30, 30);
             navigationPage2.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             navigationPage2.Name = "navigationPage2";
-            navigationPage2.Size = new System.Drawing.Size(453, 658);
+            navigationPage2.Size = new System.Drawing.Size(453, 660);
             // 
             // groupControl2
             // 
@@ -1541,7 +1541,7 @@ namespace Fihirana_database
             groupControl2.Location = new System.Drawing.Point(0, 0);
             groupControl2.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             groupControl2.Name = "groupControl2";
-            groupControl2.Size = new System.Drawing.Size(453, 268);
+            groupControl2.Size = new System.Drawing.Size(453, 270);
             groupControl2.TabIndex = 4;
             groupControl2.Text = "Paroles / Verset";
             // 
@@ -1565,7 +1565,7 @@ namespace Fihirana_database
             gridParole.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             gridParole.Name = "gridParole";
             gridParole.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repParole });
-            gridParole.Size = new System.Drawing.Size(449, 233);
+            gridParole.Size = new System.Drawing.Size(449, 235);
             gridParole.TabIndex = 1;
             gridParole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridV, gridView2 });
             // 
@@ -1616,7 +1616,7 @@ namespace Fihirana_database
             // 
             sidePanel5.Controls.Add(groupChant);
             sidePanel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            sidePanel5.Location = new System.Drawing.Point(0, 268);
+            sidePanel5.Location = new System.Drawing.Point(0, 270);
             sidePanel5.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             sidePanel5.Name = "sidePanel5";
             sidePanel5.Size = new System.Drawing.Size(453, 390);
@@ -1778,9 +1778,9 @@ namespace Fihirana_database
             tabPane.MinimumSize = new System.Drawing.Size(720, 520);
             tabPane.Name = "tabPane";
             tabPane.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { cantique, bible, agenda, recherche });
-            tabPane.RegularSize = new System.Drawing.Size(1126, 698);
+            tabPane.RegularSize = new System.Drawing.Size(1130, 700);
             tabPane.SelectedPage = cantique;
-            tabPane.Size = new System.Drawing.Size(1126, 698);
+            tabPane.Size = new System.Drawing.Size(1130, 700);
             tabPane.TabIndex = 8;
             tabPane.Text = "son";
             tabPane.SelectedPageChanged += tabPane_SelectedPageChanged;
@@ -1796,7 +1796,7 @@ namespace Fihirana_database
             cantique.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             cantique.Name = "cantique";
             cantique.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            cantique.Size = new System.Drawing.Size(1126, 660);
+            cantique.Size = new System.Drawing.Size(1130, 662);
             // 
             // sidePanelLyrics
             // 
@@ -1804,7 +1804,7 @@ namespace Fihirana_database
             sidePanelLyrics.Location = new System.Drawing.Point(0, 0);
             sidePanelLyrics.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             sidePanelLyrics.Name = "sidePanelLyrics";
-            sidePanelLyrics.Size = new System.Drawing.Size(1126, 660);
+            sidePanelLyrics.Size = new System.Drawing.Size(1130, 662);
             sidePanelLyrics.TabIndex = 0;
             // 
             // bible
@@ -1824,10 +1824,10 @@ namespace Fihirana_database
             // 
             panelVerset.Controls.Add(layoutControl2);
             panelVerset.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelVerset.Location = new System.Drawing.Point(205, 0);
+            panelVerset.Location = new System.Drawing.Point(179, 0);
             panelVerset.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             panelVerset.Name = "panelVerset";
-            panelVerset.Size = new System.Drawing.Size(909, 663);
+            panelVerset.Size = new System.Drawing.Size(935, 663);
             panelVerset.TabIndex = 7;
             // 
             // layoutControl2
@@ -1842,19 +1842,19 @@ namespace Fihirana_database
             layoutControl2.Controls.Add(listVerse);
             layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl2.Location = new System.Drawing.Point(2, 2);
-            layoutControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            layoutControl2.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             layoutControl2.Name = "layoutControl2";
             layoutControl2.Root = layoutControlGroup3;
-            layoutControl2.Size = new System.Drawing.Size(905, 659);
+            layoutControl2.Size = new System.Drawing.Size(931, 659);
             layoutControl2.TabIndex = 0;
             layoutControl2.Text = "layoutControl2";
             // 
             // selectAllBtn
             // 
-            selectAllBtn.Location = new System.Drawing.Point(307, 321);
+            selectAllBtn.Location = new System.Drawing.Point(315, 321);
             selectAllBtn.Margin = new System.Windows.Forms.Padding(2);
             selectAllBtn.Name = "selectAllBtn";
-            selectAllBtn.Size = new System.Drawing.Size(213, 27);
+            selectAllBtn.Size = new System.Drawing.Size(221, 27);
             selectAllBtn.StyleController = layoutControl2;
             selectAllBtn.TabIndex = 25;
             selectAllBtn.Text = "Sélectionner tout";
@@ -1863,23 +1863,23 @@ namespace Fihirana_database
             // 
             groupControl1.Controls.Add(gridControlVerset);
             groupControl1.Controls.Add(panelProjector);
-            groupControl1.Location = new System.Drawing.Point(536, 38);
-            groupControl1.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            groupControl1.Location = new System.Drawing.Point(552, 38);
+            groupControl1.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             groupControl1.Name = "groupControl1";
-            groupControl1.Size = new System.Drawing.Size(357, 609);
+            groupControl1.Size = new System.Drawing.Size(367, 609);
             groupControl1.TabIndex = 24;
             groupControl1.Text = "Verset(s) sélectionné(s)";
             // 
             // gridControlVerset
             // 
             gridControlVerset.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridControlVerset.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            gridControlVerset.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             gridControlVerset.Location = new System.Drawing.Point(2, 33);
             gridControlVerset.MainView = tileViewVerset;
-            gridControlVerset.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            gridControlVerset.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             gridControlVerset.Name = "gridControlVerset";
             gridControlVerset.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1 });
-            gridControlVerset.Size = new System.Drawing.Size(353, 510);
+            gridControlVerset.Size = new System.Drawing.Size(363, 510);
             gridControlVerset.TabIndex = 2;
             gridControlVerset.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { tileViewVerset, gridView5 });
             // 
@@ -1911,16 +1911,16 @@ namespace Fihirana_database
             gridView5.DetailHeight = 4174;
             gridView5.GridControl = gridControlVerset;
             gridView5.Name = "gridView5";
-            gridView5.OptionsEditForm.PopupEditFormWidth = 2411;
+            gridView5.OptionsEditForm.PopupEditFormWidth = 2110;
             // 
             // panelProjector
             // 
             panelProjector.Controls.Add(readyBtnBible);
             panelProjector.Dock = System.Windows.Forms.DockStyle.Bottom;
             panelProjector.Location = new System.Drawing.Point(2, 543);
-            panelProjector.Margin = new System.Windows.Forms.Padding(12, 18, 12, 18);
+            panelProjector.Margin = new System.Windows.Forms.Padding(10, 18, 10, 18);
             panelProjector.Name = "panelProjector";
-            panelProjector.Size = new System.Drawing.Size(353, 64);
+            panelProjector.Size = new System.Drawing.Size(363, 64);
             panelProjector.TabIndex = 3;
             // 
             // readyBtnBible
@@ -1928,10 +1928,10 @@ namespace Fihirana_database
             readyBtnBible.Dock = System.Windows.Forms.DockStyle.Right;
             readyBtnBible.ImageOptions.ImageToTextAlignment = ImageAlignToText.LeftCenter;
             readyBtnBible.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("readyBtnBible.ImageOptions.SvgImage");
-            readyBtnBible.Location = new System.Drawing.Point(273, 0);
-            readyBtnBible.Margin = new System.Windows.Forms.Padding(12, 18, 12, 18);
+            readyBtnBible.Location = new System.Drawing.Point(293, 0);
+            readyBtnBible.Margin = new System.Windows.Forms.Padding(10, 18, 10, 18);
             readyBtnBible.Name = "readyBtnBible";
-            readyBtnBible.Size = new System.Drawing.Size(80, 64);
+            readyBtnBible.Size = new System.Drawing.Size(70, 64);
             readyBtnBible.TabIndex = 0;
             readyBtnBible.Click += readyBtnBible_Click;
             // 
@@ -1939,24 +1939,24 @@ namespace Fihirana_database
             // 
             groupControl3.Controls.Add(gridVerset);
             groupControl3.Location = new System.Drawing.Point(12, 395);
-            groupControl3.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            groupControl3.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             groupControl3.Name = "groupControl3";
-            groupControl3.Size = new System.Drawing.Size(520, 252);
+            groupControl3.Size = new System.Drawing.Size(536, 252);
             groupControl3.TabIndex = 23;
             groupControl3.Text = "Multiple versets bibliques";
             // 
             // gridVerset
             // 
             gridVerset.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridVerset.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            gridVerset.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             gridLevelNode1.RelationName = "Level1";
             gridVerset.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
             gridVerset.Location = new System.Drawing.Point(2, 33);
             gridVerset.MainView = dgvVerset;
-            gridVerset.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            gridVerset.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             gridVerset.Name = "gridVerset";
             gridVerset.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit3 });
-            gridVerset.Size = new System.Drawing.Size(516, 217);
+            gridVerset.Size = new System.Drawing.Size(532, 217);
             gridVerset.TabIndex = 2;
             gridVerset.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { dgvVerset, gridView3 });
             // 
@@ -1975,7 +1975,7 @@ namespace Fihirana_database
             dgvVerset.OptionsBehavior.AutoSelectAllInEditor = false;
             dgvVerset.OptionsBehavior.Editable = false;
             dgvVerset.OptionsBehavior.ReadOnly = true;
-            dgvVerset.OptionsEditForm.PopupEditFormWidth = 2411;
+            dgvVerset.OptionsEditForm.PopupEditFormWidth = 2110;
             dgvVerset.OptionsFilter.AllowAutoFilterConditionChange = DevExpress.Utils.DefaultBoolean.False;
             dgvVerset.OptionsFilter.AllowColumnMRUFilterList = false;
             dgvVerset.OptionsFilter.AllowFilterEditor = false;
@@ -1996,11 +1996,11 @@ namespace Fihirana_database
             gridColumn1.Caption = "Parole";
             gridColumn1.ColumnEdit = repositoryItemMemoEdit3;
             gridColumn1.FieldName = "Parole";
-            gridColumn1.MinWidth = 218;
+            gridColumn1.MinWidth = 191;
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 0;
-            gridColumn1.Width = 801;
+            gridColumn1.Width = 701;
             // 
             // repositoryItemMemoEdit3
             // 
@@ -2011,16 +2011,16 @@ namespace Fihirana_database
             gridView3.DetailHeight = 4174;
             gridView3.GridControl = gridVerset;
             gridView3.Name = "gridView3";
-            gridView3.OptionsEditForm.PopupEditFormWidth = 2411;
+            gridView3.OptionsEditForm.PopupEditFormWidth = 2110;
             // 
             // clearVersetBiblique
             // 
             clearVersetBiblique.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("clearVersetBiblique.ImageOptions.SvgImage");
             clearVersetBiblique.ImageOptions.SvgImageSize = new System.Drawing.Size(15, 15);
             clearVersetBiblique.Location = new System.Drawing.Point(12, 364);
-            clearVersetBiblique.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            clearVersetBiblique.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             clearVersetBiblique.Name = "clearVersetBiblique";
-            clearVersetBiblique.Size = new System.Drawing.Size(279, 27);
+            clearVersetBiblique.Size = new System.Drawing.Size(287, 27);
             clearVersetBiblique.StyleController = layoutControl2;
             clearVersetBiblique.TabIndex = 22;
             clearVersetBiblique.Text = "Vider multiple versets";
@@ -2028,25 +2028,25 @@ namespace Fihirana_database
             // txtSearchR
             // 
             txtSearchR.Location = new System.Drawing.Point(135, 12);
-            txtSearchR.Margin = new System.Windows.Forms.Padding(12, 18, 12, 18);
+            txtSearchR.Margin = new System.Windows.Forms.Padding(10, 18, 10, 18);
             txtSearchR.Name = "txtSearchR";
             txtSearchR.Properties.NullValuePrompt = "Verset biblique.. ([entrer] pour valider)";
             txtSearchR.Properties.UseAdvancedMode = DevExpress.Utils.DefaultBoolean.True;
-            txtSearchR.Size = new System.Drawing.Size(397, 22);
+            txtSearchR.Size = new System.Drawing.Size(413, 22);
             txtSearchR.StyleController = layoutControl2;
             txtSearchR.TabIndex = 21;
             // 
             // searchControl11
             // 
             searchControl11.Client = gridControlVerset;
-            searchControl11.Location = new System.Drawing.Point(659, 12);
-            searchControl11.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            searchControl11.Location = new System.Drawing.Point(675, 12);
+            searchControl11.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             searchControl11.Name = "searchControl11";
             searchControl11.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Repository.ClearButton(), new DevExpress.XtraEditors.Repository.SearchButton() });
             searchControl11.Properties.Client = gridControlVerset;
             searchControl11.Properties.FindDelay = 500;
             searchControl11.Properties.NullValuePrompt = "Entrer un texte...";
-            searchControl11.Size = new System.Drawing.Size(234, 22);
+            searchControl11.Size = new System.Drawing.Size(244, 22);
             searchControl11.StyleController = layoutControl2;
             searchControl11.TabIndex = 16;
             // 
@@ -2057,14 +2057,14 @@ namespace Fihirana_database
             listChapter.Appearance.Options.UseTextOptions = true;
             listChapter.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             listChapter.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            listChapter.ColumnWidth = 47;
+            listChapter.ColumnWidth = 41;
             listChapter.ItemAutoHeight = true;
             listChapter.ItemHeight = 64;
             listChapter.Location = new System.Drawing.Point(24, 81);
-            listChapter.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            listChapter.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             listChapter.MultiColumn = true;
             listChapter.Name = "listChapter";
-            listChapter.Size = new System.Drawing.Size(255, 267);
+            listChapter.Size = new System.Drawing.Size(263, 267);
             listChapter.StyleController = layoutControl2;
             listChapter.TabIndex = 8;
             // 
@@ -2075,15 +2075,15 @@ namespace Fihirana_database
             listVerse.Appearance.Options.UseTextOptions = true;
             listVerse.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             listVerse.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            listVerse.ColumnWidth = 47;
+            listVerse.ColumnWidth = 41;
             listVerse.ItemAutoHeight = true;
             listVerse.ItemHeight = 64;
-            listVerse.Location = new System.Drawing.Point(307, 81);
-            listVerse.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            listVerse.Location = new System.Drawing.Point(315, 81);
+            listVerse.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             listVerse.MultiColumn = true;
             listVerse.Name = "listVerse";
             listVerse.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            listVerse.Size = new System.Drawing.Size(213, 236);
+            listVerse.Size = new System.Drawing.Size(221, 236);
             listVerse.SortOrder = System.Windows.Forms.SortOrder.Ascending;
             listVerse.StyleController = layoutControl2;
             listVerse.TabIndex = 7;
@@ -2096,7 +2096,7 @@ namespace Fihirana_database
             layoutControlGroup3.GroupBordersVisible = false;
             layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup4, layoutControlItem3, layoutControlGroup2, layoutControlItem4, emptySpaceItem1, layoutControlItem6, layoutControlItem5, layoutControlItem9 });
             layoutControlGroup3.Name = "layoutControlGroup3";
-            layoutControlGroup3.Size = new System.Drawing.Size(905, 659);
+            layoutControlGroup3.Size = new System.Drawing.Size(931, 659);
             layoutControlGroup3.TextVisible = false;
             // 
             // layoutControlGroup4
@@ -2106,7 +2106,7 @@ namespace Fihirana_database
             layoutControlGroup4.Location = new System.Drawing.Point(0, 26);
             layoutControlGroup4.Name = "layoutControlGroup4";
             layoutControlGroup4.OptionsItemText.TextToControlDistance = 5;
-            layoutControlGroup4.Size = new System.Drawing.Size(283, 326);
+            layoutControlGroup4.Size = new System.Drawing.Size(291, 326);
             layoutControlGroup4.Text = "Chapitres";
             // 
             // layoutControlItem1
@@ -2116,7 +2116,7 @@ namespace Fihirana_database
             layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(259, 271);
+            layoutControlItem1.Size = new System.Drawing.Size(267, 271);
             layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem1.TextVisible = false;
             // 
@@ -2125,7 +2125,7 @@ namespace Fihirana_database
             layoutControlItem3.Control = groupControl3;
             layoutControlItem3.Location = new System.Drawing.Point(0, 383);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(524, 256);
+            layoutControlItem3.Size = new System.Drawing.Size(540, 256);
             layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem3.TextVisible = false;
             // 
@@ -2133,10 +2133,10 @@ namespace Fihirana_database
             // 
             layoutControlGroup2.CustomizationFormText = "Versets";
             layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem7 });
-            layoutControlGroup2.Location = new System.Drawing.Point(283, 26);
+            layoutControlGroup2.Location = new System.Drawing.Point(291, 26);
             layoutControlGroup2.Name = "layoutControlGroup2";
             layoutControlGroup2.OptionsItemText.TextToControlDistance = 5;
-            layoutControlGroup2.Size = new System.Drawing.Size(241, 326);
+            layoutControlGroup2.Size = new System.Drawing.Size(249, 326);
             layoutControlGroup2.Text = "Versets";
             // 
             // layoutControlItem2
@@ -2146,7 +2146,7 @@ namespace Fihirana_database
             layoutControlItem2.CustomizationFormText = "layoutControlItem2";
             layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(217, 240);
+            layoutControlItem2.Size = new System.Drawing.Size(225, 240);
             layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem2.TextVisible = false;
             // 
@@ -2155,7 +2155,7 @@ namespace Fihirana_database
             layoutControlItem7.Control = selectAllBtn;
             layoutControlItem7.Location = new System.Drawing.Point(0, 240);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(217, 31);
+            layoutControlItem7.Size = new System.Drawing.Size(225, 31);
             layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem7.TextVisible = false;
             // 
@@ -2164,24 +2164,24 @@ namespace Fihirana_database
             layoutControlItem4.Control = clearVersetBiblique;
             layoutControlItem4.Location = new System.Drawing.Point(0, 352);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(283, 31);
+            layoutControlItem4.Size = new System.Drawing.Size(291, 31);
             layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem4.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             emptySpaceItem1.AllowHotTrack = false;
-            emptySpaceItem1.Location = new System.Drawing.Point(283, 352);
+            emptySpaceItem1.Location = new System.Drawing.Point(291, 352);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(241, 31);
+            emptySpaceItem1.Size = new System.Drawing.Size(249, 31);
             emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = groupControl1;
-            layoutControlItem6.Location = new System.Drawing.Point(524, 26);
+            layoutControlItem6.Location = new System.Drawing.Point(540, 26);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(361, 613);
+            layoutControlItem6.Size = new System.Drawing.Size(371, 613);
             layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             layoutControlItem6.TextVisible = false;
             // 
@@ -2190,9 +2190,9 @@ namespace Fihirana_database
             layoutControlItem5.Control = searchControl11;
             layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             layoutControlItem5.CustomizationFormText = "Recherche mots:";
-            layoutControlItem5.Location = new System.Drawing.Point(524, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(540, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(361, 26);
+            layoutControlItem5.Size = new System.Drawing.Size(371, 26);
             layoutControlItem5.Text = "Recherche mots:";
             layoutControlItem5.TextSize = new System.Drawing.Size(111, 16);
             // 
@@ -2203,7 +2203,7 @@ namespace Fihirana_database
             layoutControlItem9.CustomizationFormText = "Recherche rapide:";
             layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(524, 26);
+            layoutControlItem9.Size = new System.Drawing.Size(540, 26);
             layoutControlItem9.Text = "Recherche rapide:";
             layoutControlItem9.TextSize = new System.Drawing.Size(111, 16);
             // 
@@ -2214,9 +2214,9 @@ namespace Fihirana_database
             sidePanel6.Controls.Add(panelControl4);
             sidePanel6.Dock = System.Windows.Forms.DockStyle.Left;
             sidePanel6.Location = new System.Drawing.Point(0, 0);
-            sidePanel6.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            sidePanel6.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             sidePanel6.Name = "sidePanel6";
-            sidePanel6.Size = new System.Drawing.Size(205, 663);
+            sidePanel6.Size = new System.Drawing.Size(179, 663);
             sidePanel6.TabIndex = 5;
             sidePanel6.Text = "sidePanel6";
             // 
@@ -2224,14 +2224,14 @@ namespace Fihirana_database
             // 
             gridBook.DataSource = xpCollBook;
             gridBook.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridBook.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            gridBook.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             gridBook.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             gridBook.Location = new System.Drawing.Point(0, 117);
             gridBook.MainView = dgvBook;
-            gridBook.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            gridBook.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             gridBook.Name = "gridBook";
             gridBook.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit2, repositoryItemRichTextEdit2 });
-            gridBook.Size = new System.Drawing.Size(204, 546);
+            gridBook.Size = new System.Drawing.Size(178, 546);
             gridBook.TabIndex = 4;
             gridBook.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { dgvBook });
             // 
@@ -2254,7 +2254,7 @@ namespace Fihirana_database
             dgvBook.OptionsBehavior.AutoExpandAllGroups = true;
             dgvBook.OptionsBehavior.Editable = false;
             dgvBook.OptionsBehavior.ReadOnly = true;
-            dgvBook.OptionsEditForm.PopupEditFormWidth = 2411;
+            dgvBook.OptionsEditForm.PopupEditFormWidth = 2110;
             dgvBook.OptionsSelection.EnableAppearanceFocusedCell = false;
             dgvBook.OptionsView.RowAutoHeight = true;
             dgvBook.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
@@ -2267,73 +2267,73 @@ namespace Fihirana_database
             // colid_book
             // 
             colid_book.FieldName = "id_book";
-            colid_book.MinWidth = 218;
+            colid_book.MinWidth = 191;
             colid_book.Name = "colid_book";
-            colid_book.Width = 801;
+            colid_book.Width = 701;
             // 
             // colbook_number
             // 
             colbook_number.FieldName = "book_number";
-            colbook_number.MinWidth = 218;
+            colbook_number.MinWidth = 191;
             colbook_number.Name = "colbook_number";
-            colbook_number.Width = 801;
+            colbook_number.Width = 701;
             // 
             // colchapter_count
             // 
             colchapter_count.FieldName = "chapter_count";
-            colchapter_count.MinWidth = 218;
+            colchapter_count.MinWidth = 191;
             colchapter_count.Name = "colchapter_count";
-            colchapter_count.Width = 801;
+            colchapter_count.Width = 701;
             // 
             // colbook_category
             // 
             colbook_category.FieldName = "book_category";
-            colbook_category.MinWidth = 218;
+            colbook_category.MinWidth = 191;
             colbook_category.Name = "colbook_category";
-            colbook_category.Width = 801;
+            colbook_category.Width = 701;
             // 
             // colshort_name
             // 
             colshort_name.FieldName = "short_name";
-            colshort_name.MinWidth = 218;
+            colshort_name.MinWidth = 191;
             colshort_name.Name = "colshort_name";
-            colshort_name.Width = 801;
+            colshort_name.Width = 701;
             // 
             // collong_name
             // 
             collong_name.Caption = "MALAGASY";
             collong_name.FieldName = "long_name";
-            collong_name.MinWidth = 218;
+            collong_name.MinWidth = 191;
             collong_name.Name = "collong_name";
             collong_name.Visible = true;
             collong_name.VisibleIndex = 0;
-            collong_name.Width = 801;
+            collong_name.Width = 701;
             // 
             // collong_name_french
             // 
             collong_name_french.Caption = "FRANCAIS";
             collong_name_french.FieldName = "long_name_french";
-            collong_name_french.MinWidth = 218;
+            collong_name_french.MinWidth = 191;
             collong_name_french.Name = "collong_name_french";
-            collong_name_french.Width = 801;
+            collong_name_french.Width = 701;
             // 
             // collong_name_english
             // 
             collong_name_english.Caption = "ANGLAIS";
             collong_name_english.FieldName = "long_name_english";
-            collong_name_english.MinWidth = 218;
+            collong_name_english.MinWidth = 191;
             collong_name_english.Name = "collong_name_english";
-            collong_name_english.Width = 801;
+            collong_name_english.Width = 701;
             // 
             // colBookC
             // 
             colBookC.Caption = "Catégorie";
             colBookC.FieldName = "colBookC";
-            colBookC.MinWidth = 218;
+            colBookC.MinWidth = 191;
             colBookC.Name = "colBookC";
             colBookC.UnboundExpression = "Iif([book_category] = 0, 'Ancient Testament', 'Nouveau Testament')";
             colBookC.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            colBookC.Width = 801;
+            colBookC.Width = 701;
             // 
             // repositoryItemMemoEdit2
             // 
@@ -2350,22 +2350,22 @@ namespace Fihirana_database
             panelControl1.Controls.Add(searchVersionControl);
             panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             panelControl1.Location = new System.Drawing.Point(0, 21);
-            panelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            panelControl1.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             panelControl1.Name = "panelControl1";
-            panelControl1.Size = new System.Drawing.Size(204, 96);
+            panelControl1.Size = new System.Drawing.Size(178, 96);
             panelControl1.TabIndex = 7;
             // 
             // listBible
             // 
             listBible.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            listBible.Location = new System.Drawing.Point(19, 25);
-            listBible.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            listBible.Location = new System.Drawing.Point(17, 25);
+            listBible.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             listBible.MenuManager = ribbonCtrl;
             listBible.Name = "listBible";
             listBible.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             listBible.Properties.Items.AddRange(new object[] { "Baiboly Malagasy", "Baiboly DIEM", "Bible Louis Second", "Bible du semeur", "New Internation Version", "King James Version" });
             listBible.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            listBible.Size = new System.Drawing.Size(162, 22);
+            listBible.Size = new System.Drawing.Size(142, 22);
             listBible.TabIndex = 0;
             listBible.SelectedIndexChanged += listBible_SelectedIndexChanged;
             // 
@@ -2373,15 +2373,15 @@ namespace Fihirana_database
             // 
             searchVersionControl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             searchVersionControl.Client = gridBook;
-            searchVersionControl.Location = new System.Drawing.Point(19, 53);
-            searchVersionControl.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            searchVersionControl.Location = new System.Drawing.Point(17, 53);
+            searchVersionControl.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             searchVersionControl.MenuManager = ribbonCtrl;
             searchVersionControl.Name = "searchVersionControl";
             searchVersionControl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Repository.ClearButton(), new DevExpress.XtraEditors.Repository.SearchButton() });
             searchVersionControl.Properties.Client = gridBook;
             searchVersionControl.Properties.FindDelay = 100;
             searchVersionControl.Properties.NullValuePrompt = "Entrer un livre...";
-            searchVersionControl.Size = new System.Drawing.Size(162, 22);
+            searchVersionControl.Size = new System.Drawing.Size(142, 22);
             searchVersionControl.TabIndex = 0;
             // 
             // panelControl4
@@ -2389,16 +2389,16 @@ namespace Fihirana_database
             panelControl4.Controls.Add(labelControl3);
             panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
             panelControl4.Location = new System.Drawing.Point(0, 0);
-            panelControl4.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            panelControl4.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
             panelControl4.Name = "panelControl4";
-            panelControl4.Size = new System.Drawing.Size(204, 21);
+            panelControl4.Size = new System.Drawing.Size(178, 21);
             panelControl4.TabIndex = 9;
             // 
             // labelControl3
             // 
             labelControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
             labelControl3.Location = new System.Drawing.Point(2, 3);
-            labelControl3.Margin = new System.Windows.Forms.Padding(36, 46, 36, 46);
+            labelControl3.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             labelControl3.Name = "labelControl3";
             labelControl3.Size = new System.Drawing.Size(114, 16);
             labelControl3.TabIndex = 8;
@@ -2591,7 +2591,7 @@ namespace Fihirana_database
             // gridControlBible
             // 
             gridControlBible.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridControlBible.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(37, 46, 37, 46);
+            gridControlBible.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(32, 46, 32, 46);
             gridControlBible.Location = new System.Drawing.Point(0, 119);
             gridControlBible.MainView = BibleTileView;
             gridControlBible.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
@@ -2999,7 +2999,7 @@ namespace Fihirana_database
             fluentDesignFormContainer1.Location = new System.Drawing.Point(0, 175);
             fluentDesignFormContainer1.Margin = new System.Windows.Forms.Padding(54, 46, 54, 46);
             fluentDesignFormContainer1.Name = "fluentDesignFormContainer1";
-            fluentDesignFormContainer1.Size = new System.Drawing.Size(1653, 730);
+            fluentDesignFormContainer1.Size = new System.Drawing.Size(1657, 732);
             fluentDesignFormContainer1.TabIndex = 11;
             // 
             // _searchTimer
@@ -3022,7 +3022,7 @@ namespace Fihirana_database
             Appearance.Options.UseFont = true;
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1653, 905);
+            ClientSize = new System.Drawing.Size(1657, 907);
             Controls.Add(tabPane);
             Controls.Add(navigationProject);
             Controls.Add(ribbonStatusBar1);
@@ -3032,7 +3032,7 @@ namespace Fihirana_database
             IconOptions.Icon = (System.Drawing.Icon)resources.GetObject("MainForm.IconOptions.Icon");
             IconOptions.Image = (System.Drawing.Image)resources.GetObject("MainForm.IconOptions.Image");
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            MinimumSize = new System.Drawing.Size(1288, 894);
+            MinimumSize = new System.Drawing.Size(1284, 892);
             Name = "MainForm";
             Ribbon = ribbonCtrl;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

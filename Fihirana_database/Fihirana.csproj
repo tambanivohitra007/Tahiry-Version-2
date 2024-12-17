@@ -159,6 +159,7 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.Data.Desktop" Version="23.2.9" />
     <PackageReference Include="DevExpress.DataAccess.UI" Version="23.2.9" />
+    <PackageReference Include="DevExpress.Win.Design" Version="23.2.9" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

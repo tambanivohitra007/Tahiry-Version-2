@@ -30,6 +30,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,6 +91,39 @@ namespace Fihirana_database
         private object Bible = null;
 
         private Screen[] screens;
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        private struct DISPLAY_DEVICE
+        {
+            [MarshalAs(UnmanagedType.U4)]
+            public int cb;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string DeviceName;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string DeviceString;
+            [MarshalAs(UnmanagedType.U4)]
+            public DisplayDeviceStateFlags StateFlags;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string DeviceID;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string DeviceKey;
+        }
+
+        [Flags]
+        private enum DisplayDeviceStateFlags : int
+        {
+            AttachedToDesktop = 0x1,
+            MultiDriver = 0x2,
+            PrimaryDevice = 0x4,
+            MirroringDriver = 0x8,
+            VGACompatible = 0x10,
+            Removable = 0x20,
+            ModesPruned = 0x8000000,
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Ansi)]
+        private static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, uint dwFlags);
+
         #endregion
 
         /// <summary>
@@ -108,7 +142,8 @@ namespace Fihirana_database
         public MainForm()
         {
             InitializeComponent();
-            SystemEvents.DisplaySettingsChanged += (s, e) => loadDisplays2();
+            SystemEvents.DisplaySettingsChanged += (s, e) => 
+                LoadDisplays();
             try
             {
                 sett = session.Query<Settings>();
@@ -254,33 +289,12 @@ namespace Fihirana_database
                 initColorHandle = true;
             };
 
-            loadDisplays2();
+            LoadDisplays();
 
             barListProjector.ItemClick += (s, e) =>
             {
                 barSelectProjector.Caption = barListProjector.Strings[barListProjector.DataIndex];
             };
-        }
-
-        /// <summary>
-        /// Load different monitors from ObjectQuery
-        /// </summary>
-        private void loadDisplays()
-        {
-            ManagementScope scope = new ManagementScope("\\\\.\\ROOT\\cimv2");
-            System.Management.ObjectQuery query = new System.Management.ObjectQuery("SELECT * FROM Win32_DesktopMonitor");
-
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
-            using (ManagementObjectCollection queryCollection = searcher.Get())
-            {
-                barListProjector.Strings.Clear();
-                int count = 1;
-                foreach (ManagementObject mo in queryCollection)
-                {
-                    _ = barListProjector.Strings.Add($"{count} - {mo["DeviceID"]}, {mo["Description"]}");
-                    count++;
-                }
-            }
 
             //barListProjector.ItemClick += (s, e) => project();
             DisplayForm.CloseProjection += (s, e) => resetButtonSettings();
@@ -296,52 +310,41 @@ namespace Fihirana_database
         /// <summary>
         /// Load different monitors using Registry
         /// </summary>
-        private void loadDisplays2()
+        private void LoadDisplays()
         {
-            // Set up the WMI query
-            string query = "SELECT Caption, MonitorType, MonitorManufacturer, Name FROM Win32_DesktopMonitor";
+            Screen[] screens = Screen.AllScreens;
 
-            // Create a ManagementObjectSearcher with the query
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+            // Clear existing list
+            barListProjector.Strings.Clear();
+
+            int count = 1;
+
+            // Each Screen corresponds (generally) to a display device
+            for (int i = 0; i < screens.Length; i++)
             {
-                // Execute the query and get the result
-                ManagementObjectCollection result = searcher.Get();
-                int count = 1;
-                barListProjector.Strings.Clear();
-                // Iterate through the result and print the values
-                foreach (ManagementObject mo in result)
+                // screens[i].DeviceName is like \\.\DISPLAY1
+                string deviceName = screens[i].DeviceName;
+
+                // Get more info via EnumDisplayDevices
+                DISPLAY_DEVICE dd = new DISPLAY_DEVICE();
+                dd.cb = Marshal.SizeOf(dd);
+                if (EnumDisplayDevices(deviceName, 0, ref dd, 0))
                 {
-                    _ = barListProjector.Strings.Add($"{count} - {mo["MonitorType"]}, {mo["Name"]}");
-                    count++;
-                }
-            }
+                    // dd.DeviceString often contains a more friendly name, like the monitor model
+                    string friendlyName = dd.DeviceString;
+                    bool isPrimary = screens[i].Primary;
+                    string resolution = $"{screens[i].Bounds.Width}x{screens[i].Bounds.Height}";
 
-            //barListProjector.ItemClick += (s, e) => project();
-            DisplayForm.CloseProjection += (s, e) => resetButtonSettings();
-            selectAllBtn.Click += (s, e) =>
-            {
-                for (int i = 0; i < listVerse.Items.Count; i++)
+                    string displayText = $"{count} - {friendlyName} {resolution}" + (isPrimary ? " (Primary)" : "");
+                    barListProjector.Strings.Add(displayText);
+                }
+                else
                 {
-                    listVerse.SetSelected(i, true);
+                    // Fallback if EnumDisplayDevices fails
+                    barListProjector.Strings.Add($"{count} - {deviceName}");
                 }
-            };
-        }
 
-        private static ManagementObjectCollection GetDisplayDevices(string wmiClass)
-        {
-            try
-            {
-                // Create a searcher object
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher(
-                    $"SELECT * FROM {wmiClass}");
-
-                // Retrieve all display devices
-                return searcher.Get();
-            }
-            catch (ManagementException ex)
-            {
-                _ = XtraMessageBox.Show($"Error retrieving display devices: {ex.Message}", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
+                count++;
             }
         }
 
@@ -565,6 +568,10 @@ namespace Fihirana_database
                 Application.Exit();
             }
             else e.Cancel = true;
+        }
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
         }
 
         private void dgv_DoubleClick(object sender, EventArgs e)

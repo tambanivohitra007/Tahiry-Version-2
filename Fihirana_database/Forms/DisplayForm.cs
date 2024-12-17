@@ -239,7 +239,11 @@ namespace Fihirana_database.Forms
             };
 
             MainForm.SetColor += (s, e) =>
-                webView.ExecuteScriptAsync($"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]})");
+            {
+                if (webView.CoreWebView2 == null) return;
+                webView.CoreWebView2.ExecuteScriptAsync($"_Color({Couleur[0]}, {Couleur[1]}, {Couleur[2]})");
+            };
+                
 
             MainForm.clickRefresh += async (s, e) =>
             {
@@ -271,14 +275,23 @@ namespace Fihirana_database.Forms
         /// </summary>
         private void changeAlignement(int index)
         {
-            string alignment = index switch
+            try
             {
-                1 => "left",
-                2 => "right",
-                3 => "center",
-                _ => ""
-            };
-            _ = webView.CoreWebView2.ExecuteScriptAsync($"_Alignment(\"{alignment}\")");
+                if (webView.CoreWebView2 == null) return;
+
+                string alignment = index switch
+                {
+                    1 => "left",
+                    2 => "right",
+                    3 => "center",
+                    _ => ""
+                };
+                webView.CoreWebView2.ExecuteScriptAsync($"_Alignment(\"{alignment}\")");
+            }
+            catch
+            {
+                // Log or handle errors silently
+            }
         }
 
         /// <summary>
@@ -288,6 +301,8 @@ namespace Fihirana_database.Forms
         {
             try
             {
+                if (webView.CoreWebView2 == null) return;
+
                 if (!string.IsNullOrEmpty(imagePath) && !imagePath.Equals("none"))
                 {
                     byte[] imageArray = File.ReadAllBytes(imagePath);
@@ -312,6 +327,8 @@ namespace Fihirana_database.Forms
         {
             try
             {
+                if (webView.CoreWebView2 == null) return;
+
                 if (!string.IsNullOrEmpty(videoPath))
                 {
                     byte[] videoArray = File.ReadAllBytes(videoPath);
@@ -324,56 +341,6 @@ namespace Fihirana_database.Forms
                 // Log or handle errors silently
             }
         }
-
-        /// <summary>
-        /// Loads HTML, CSS, and JavaScript resources into the display.
-        /// </summary>
-        /// <summary>
-        /// Loads the HTML source into the WebView2 and dynamically injects CSS and JavaScript.
-        /// </summary>
-        /// <param name="source">The base HTML source string.</param>
-        /// <param name="css">Additional CSS to inject.</param>
-        /// <param name="js">Additional JavaScript to inject.</param>
-        //public void LoadSource(string source, string css, string js)
-        //{
-        //    if (string.IsNullOrWhiteSpace(source))
-        //    {
-        //        MessageBox.Show("HTML source cannot be null or empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        // Ensure WebView2 is ready
-        //        if (webView.CoreWebView2 == null)
-        //        {
-        //            MessageBox.Show("WebView2 is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            return;
-        //        }
-
-        //        // Load required resources from project resources
-        //        string animateCss = Properties.Resources.animate_min_css;
-        //        string jqueryJs = Properties.Resources.jquery_min_js;
-        //        string textFitJs = Properties.Resources.textFit_min_js;
-
-        //        // Inject CSS and JS into the HTML source
-        //        source = source.Replace("</head>", $"<style>{animateCss}</style></head>")
-        //                       .Replace("</head>", $"<style>{css}</style></head>")
-        //                       .Replace("</body>", $"<script>{jqueryJs}</script></body>")
-        //                       .Replace("</body>", $"<script>{textFitJs}</script></body>")
-        //                       .Replace("</body>", $"<script>{js}</script></body>");
-
-        //        // Navigate to the modified HTML string
-        //        webView.CoreWebView2.NavigateToString(source);
-
-        //        // Call settings initialization if required
-        //        initSettings();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Failed to load source: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
 
         public async void LoadSource(string htmlFilePath, List<string> cssFiles, List<string> jsFiles, string customJsFilePath = null)
         {
